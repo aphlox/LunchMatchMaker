@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="#ACA4A4"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/mapButton"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+
+            app:srcCompat="@drawable/map" />
+
+        <TextView
+
+            android:id="@+id/principleCheck"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20dp" />
+
+
+        <ImageView
+            android:id="@+id/profileButtonOld"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            />
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMatchList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/matchBottomBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/matchBottomBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/matchBottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/MatchImage"
+            android:layout_width="70dp"
+            android:layout_height="42dp"
+            android:tint="@color/colorAccent"
+
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintEnd_toStartOf="@+id/matchToStoryImage"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/match" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="매치"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/MatchImage"
+            app:layout_constraintStart_toStartOf="@+id/MatchImage"
+            app:layout_constraintTop_toBottomOf="@+id/MatchImage" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="스토리"
+            android:textColor="@color/colorGrey50"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/matchToStoryImage"
+            app:layout_constraintStart_toStartOf="@+id/matchToStoryImage"
+            app:layout_constraintTop_toBottomOf="@+id/matchToStoryImage" />
+
+        <ImageView
+            android:id="@+id/matchToStoryImage"
+            android:layout_width="70dp"
+            android:layout_height="42dp"
+            android:tint="@color/colorGrey50"
+            app:layout_constraintBottom_toTopOf="@+id/textView13"
+            app:layout_constraintEnd_toStartOf="@+id/matchToProfileImage"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/MatchImage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/storyimage" />
+
+        <ImageView
+            android:id="@+id/matchToProfileImage"
+            android:layout_width="70dp"
+            android:layout_height="42dp"
+            android:tint="@color/colorGrey50"
+            app:layout_constraintBottom_toTopOf="@+id/textView14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/matchToStoryImage"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:srcCompat="@drawable/profilebold" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로필"
+            android:textColor="@color/colorGrey50"
+            android:textSize="16dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/matchToProfileImage"
+            app:layout_constraintStart_toStartOf="@+id/matchToProfileImage"
+            app:layout_constraintTop_toBottomOf="@+id/matchToProfileImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

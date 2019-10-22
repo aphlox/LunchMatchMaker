@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="순위별 추천"
+        android:textSize="15dp"
+        android:elevation="3dp"
+
+        android:background="@drawable/backgroud_item"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/fabRecommendChange"
+        app:layout_constraintEnd_toEndOf="@+id/fabRecommendChange"
+        app:layout_constraintStart_toStartOf="@+id/fabRecommendChange" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="맛집추천"
+        android:elevation="3dp"
+
+        android:background="@drawable/backgroud_item"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/fabRecommend"
+        app:layout_constraintEnd_toEndOf="@+id/fabRecommend"
+        app:layout_constraintStart_toStartOf="@+id/fabRecommend" />
+
+    <TextView
+        android:id="@+id/recommendValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:visibility="visible"
+        android:background="@color/recipeBlue4"
+
+        app:layout_constraintEnd_toEndOf="@+id/fabRecommendChange"
+        app:layout_constraintStart_toStartOf="@+id/fabRecommendChange"
+        app:layout_constraintTop_toBottomOf="@+id/fabRecommendChange" />
+
+    <TextView
+        android:id="@+id/recommendCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:visibility="visible"
+        android:background="@color/recipeBlue4"
+        app:layout_constraintEnd_toEndOf="@+id/fabRecommend"
+        app:layout_constraintStart_toStartOf="@+id/fabRecommend"
+        app:layout_constraintTop_toBottomOf="@+id/fabRecommend" />
+
+    <FrameLayout
+        android:id="@+id/mapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMoveToList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:tint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mapFragment"
+        app:maxImageSize="35dp"
+        app:srcCompat="@drawable/baseline_list_black_18dp" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabRecommendChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/fabAdd"
+        app:layout_constraintEnd_toStartOf="@+id/fabAdd"
+        app:layout_constraintTop_toTopOf="@+id/fabAdd"
+        app:srcCompat="@drawable/ic_loop_black_24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:tint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentMatchInformation"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:maxImageSize="35dp"
+        app:srcCompat="@drawable/ic_play_arrow_black_24dp" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="25dp"
+        android:tint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentMatchInformation"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:maxImageSize="35dp"
+        app:srcCompat="@drawable/plus" />
+
+
+    <fragment
+        android:id="@+id/fragmentMatchInformation"
+        android:tag="fragment_match_information"
+        android:name="june.second.lunchmatchmaker.Activity.MatchInformationFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:maxHeight="150dp"
+        app:layout_constraintHeight_max="170dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/crosshair"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+
+        android:contentDescription="@string/content_description_target_crosshair"
+        android:src="@drawable/crosshair"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/crosshairRightUp"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:visibility="invisible"
+        android:contentDescription="@string/content_description_target_crosshair"
+        android:src="@drawable/crosshair"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/crosshairLeftDown"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:visibility="invisible"
+        android:contentDescription="@string/content_description_target_crosshair"
+        android:src="@drawable/crosshair"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentMatchInformation"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabRecommend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@+id/fabAdd"
+        app:layout_constraintEnd_toEndOf="@+id/fabAdd"
+        app:layout_constraintStart_toStartOf="@+id/fabAdd"
+        app:srcCompat="@drawable/ic_place_black_24dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

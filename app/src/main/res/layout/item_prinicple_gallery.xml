@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<june.second.lunchmatchmaker.Etc.CheckableLinearLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="#FF8A80"
+        >
+
+
+        <CheckBox
+            android:id="@+id/principle_gallery_cb"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            android:focusable="false"
+            android:clickable="false"
+            />
+
+
+
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/principleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+
+            android:text = "hellooooo"
+            android:textSize="30dp" />
+ <!--       <ImageView
+            android:id="@+id/principleImageView"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher" />-->
+
+
+
+
+
+</june.second.lunchmatchmaker.Etc.CheckableLinearLayout>

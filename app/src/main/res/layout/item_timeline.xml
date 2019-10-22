@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<june.second.lunchmatchmaker.Etc.CheckableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <View
+            android:id="@+id/upLine"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+
+            android:layout_centerInParent="true"
+            android:background="@color/colorPrimary"/>
+
+
+
+        <ImageView
+            android:id="@+id/middleCircle"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/shape_circle"
+            />
+
+        <View
+            android:id="@+id/downLine"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:background="@color/colorPrimary"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="center_vertical"
+        app:cardBackgroundColor="@color/fragmentfrontcolor"
+        app:contentPadding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textTimelineDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2019/10/07 오후 9시 20분"
+                android:textSize="12sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textTimelineTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="광화문 샤이바나에서 밥 먹으면서 여행 얘기 나누실 분?"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</june.second.lunchmatchmaker.Etc.CheckableLinearLayout>

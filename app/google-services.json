@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "220960813055",
+    "firebase_url": "https://lunch-match-maker.firebaseio.com",
+    "project_id": "lunch-match-maker",
+    "storage_bucket": "lunch-match-maker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220960813055:android:054c7b1b208d17ca3081ca",
+        "android_client_info": {
+          "package_name": "june.second.lunchmatchmaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220960813055-e37dkb5k4pfm6k2jh7hf4ols02mdunrt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgmQz5O4eSAx5SAC6MeeDi7rofHu7lDI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220960813055-e37dkb5k4pfm6k2jh7hf4ols02mdunrt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+  >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/fragmentbackcolor">
+
+
+        <TextView
+            android:id="@+id/member1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="김파이"
+            android:textSize="35dp"
+            app:layout_constraintEnd_toStartOf="@+id/member3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/memberTitle" />
+
+
+        <TextView
+            android:id="@+id/member2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="이누가"
+            android:textSize="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/member1"
+            app:layout_constraintTop_toBottomOf="@+id/member1"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <TextView
+            android:id="@+id/member3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="오레오"
+            android:textSize="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/member1"
+            app:layout_constraintTop_toTopOf="@+id/member1" />
+
+
+        <TextView
+            android:id="@+id/member4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="최멜로"
+            android:textSize="35dp"
+            app:layout_constraintStart_toStartOf="@+id/member3"
+            app:layout_constraintTop_toTopOf="@+id/member2" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/indicator_third" />
+
+        <TextView
+            android:id="@+id/memberTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="참가하는 사람들"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyTitleTextStyle">
+        <item name="android:textColor">@color/fragmentfrontcolor</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+    </style>
+
+
+    <style name="Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@color/colorPrimaryDark</item>     <!--Dialog background-->
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>    <!--content text color-->
+        <item name="android:windowTitleStyle">@style/MyTitleTextStyle</item> <!--title text style-->
+
+        <item name="colorAccent">@color/fragmentfrontcolor</item>     <!--Button text color-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+</resources>

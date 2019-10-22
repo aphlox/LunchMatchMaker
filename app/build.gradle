@@ -1,0 +1,68 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+    defaultConfig {
+        applicationId "june.second.lunchmatchmaker"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //네이버 지도 마커
+    //    implementation 'gun0912.ted:tedclustering-naver:x.y.z'
+    implementation 'gun0912.ted:tedclustering-naver:1.0.2'
+    //크롤링
+    implementation 'org.jsoup:jsoup:1.11.3'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    //파이어베이스
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
+    implementation 'com.google.firebase:firebase-common@[11.0.2]'
+    //파이어베이스 이메일 인증
+    implementation 'com.google.firebase:firebase-auth:19.0.0'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    //editText 디자인
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.google.android.material:material:1.0.0-beta01'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    // 네이버 지도 SDK
+    // 네이버 지도 SDK
+    implementation 'com.naver.maps:map-sdk:3.6.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    //네이버 현재위치
+    implementation 'org.jetbrains.anko:anko-commons:0.10.8'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3"'
+    implementation 'com.google.android:flexbox:1.0.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.naver.maps:map-sdk:3.6.0'
+    //ted permission
+    implementation 'gun0912.ted:tedpermission:2.1.0'
+    implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation files('libs/activation.jar')
+}
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MatchAddActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="#ACA4A4"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+
+            app:srcCompat="?attr/actionModeCloseDrawable" />
+
+        <TextView
+
+            android:id="@+id/principleCheck"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20dp" />
+
+
+        <ImageView
+            android:id="@+id/check"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/check"
+            />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/matchTitleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Match 이름"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/matchEditTitle"
+        app:layout_constraintStart_toStartOf="@+id/matchEditTitle" />
+
+    <EditText
+        android:id="@+id/matchEditTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:hint="Match 이름"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/matchTimeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Match 시간"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/matchTime"
+        app:layout_constraintStart_toStartOf="@+id/matchTime" />
+
+    <TextView
+        android:id="@+id/matchTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="MatchTime"
+        android:textSize="35dp"
+        app:layout_constraintStart_toStartOf="@+id/matchEditTitle"
+        app:layout_constraintTop_toBottomOf="@+id/matchEditTitle" />
+
+    <Button
+        android:id="@+id/btnDateSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:text="Edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/matchTime" />
+
+    <TextView
+        android:id="@+id/matchPlaceTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Match 장소"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/matchPlace"
+        app:layout_constraintStart_toStartOf="@+id/matchPlace" />
+
+    <EditText
+        android:id="@+id/matchPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:ems="10"
+        android:hint="장소"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/matchTime"
+        app:layout_constraintTop_toBottomOf="@+id/matchTime" />
+
+
+    <TextView
+        android:id="@+id/matchPeopleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Match 최대 인원수"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/peopleSpinner"
+        app:layout_constraintStart_toStartOf="@+id/matchPlace" />
+
+    <TextView
+        android:id="@+id/matchKeywordTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Match 대화 키워드"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/matchKeywordFirst"
+        app:layout_constraintStart_toStartOf="@+id/matchKeywordFirst" />
+
+    <EditText
+        android:id="@+id/matchKeywordFirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="대화 키워드"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/matchPlace"
+        app:layout_constraintTop_toBottomOf="@+id/peopleSpinner" />
+
+    <EditText
+        android:id="@+id/matchKeywordSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="대화 키워드"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/matchKeywordFirst"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/matchKeywordFirst"
+        app:layout_constraintTop_toBottomOf="@+id/matchKeywordFirst" />
+
+    <EditText
+        android:id="@+id/matchKeywordThird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="대화 키워드"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/matchKeywordSecond"
+        app:layout_constraintHorizontal_bias="0.353"
+        app:layout_constraintStart_toStartOf="@+id/matchKeywordSecond"
+        app:layout_constraintTop_toBottomOf="@+id/matchKeywordSecond" />
+
+    <Spinner
+        android:id="@+id/peopleSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        app:layout_constraintEnd_toEndOf="@+id/matchPeopleTitle"
+        app:layout_constraintTop_toBottomOf="@+id/matchPlace" />
+
+
+    <LinearLayout
+        android:id="@+id/layoutTimelineDel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FF8A80"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/ic_principle_check_del"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:text="삭제"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

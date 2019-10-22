@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MatchAddActivity">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="#ACA4A4"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+
+            app:srcCompat="?attr/actionModeCloseDrawable" />
+
+
+        <TextView
+
+            android:id="@+id/principleCheck"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/check"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/check" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/matchTitleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Match 이름"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/matchTitle"
+        app:layout_constraintStart_toStartOf="@+id/matchTitle" />
+
+    <EditText
+        android:id="@+id/matchTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="70dp"
+        android:ems="10"
+        android:hint="Match 이름"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/matchTimeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Match 시간"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/matchDate"
+        app:layout_constraintStart_toStartOf="@+id/matchDate" />
+
+    <TextView
+        android:id="@+id/matchDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="MatchDate"
+        android:textSize="35dp"
+        app:layout_constraintStart_toStartOf="@+id/matchTitle"
+        app:layout_constraintTop_toBottomOf="@+id/matchTitle" />
+
+    <Button
+        android:id="@+id/btnDateSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:text="Edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/matchDate" />
+
+
+    <TextView
+        android:id="@+id/matchTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MatchTime"
+        android:textSize="35dp"
+        app:layout_constraintStart_toStartOf="@+id/matchTitle"
+        app:layout_constraintTop_toBottomOf="@+id/matchDate" />
+
+    <Button
+        android:id="@+id/btnTimeSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        app:layout_constraintEnd_toEndOf="@+id/btnDateSet"
+        app:layout_constraintStart_toStartOf="@+id/btnDateSet"
+        app:layout_constraintTop_toBottomOf="@+id/btnDateSet" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

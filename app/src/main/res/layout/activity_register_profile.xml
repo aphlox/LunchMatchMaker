@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageViewProfile"
+        android:layout_width="240dp"
+        android:layout_height="320dp"
+
+        android:layout_marginTop="50dp"
+        android:maxWidth="240dp"
+        android:maxHeight="320dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editUserCommentLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="0dp"
+        android:layout_weight="8"
+        android:ems="9"
+        android:gravity="top"
+        android:hint="간단한 자기 소개"
+        android:inputType="textMultiLine"
+
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/editUserNicknameLayout"
+        app:layout_constraintStart_toStartOf="@+id/userNameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/editUserNicknameLayout"
+
+
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editUserComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:id="@+id/view11"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="7dp"
+        android:background="#8F8D8D"
+        app:layout_constraintEnd_toEndOf="@id/userNameLayout"
+        app:layout_constraintStart_toStartOf="@+id/textGender"
+        app:layout_constraintTop_toBottomOf="@+id/textBirthday" />
+
+    <View
+        android:id="@+id/view10"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="7dp"
+        android:background="#8F8D8D"
+        app:layout_constraintEnd_toEndOf="@id/userNameLayout"
+        app:layout_constraintStart_toStartOf="@+id/textGender"
+        app:layout_constraintTop_toBottomOf="@+id/textGender" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="358dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:text="프로필 입력"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userNameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="150dp"
+        android:ems="10"
+        android:hint="이름"
+        android:inputType="textPersonName"
+
+        android:textColorHint="#8F8D8D"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+
+        >
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editUserNicknameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="닉네임"
+        android:inputType="textPersonName"
+        android:textColorHint="#8F8D8D"
+
+
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/userNameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/view11"
+
+        >
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editUserNickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/profileRegisterBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="뒤로"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/profileRegisterNextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:text="완료"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="성별"
+        android:textColor="#000000"
+        android:textSize="17dp"
+
+        app:layout_constraintStart_toStartOf="@+id/userNameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/userNameLayout" />
+
+    <TextView
+        android:id="@+id/textGenderSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선택해주세요"
+        android:textColor="#8F8D8D"
+        android:textSize="17dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/textGender"
+        app:layout_constraintEnd_toEndOf="@+id/view10"
+        app:layout_constraintTop_toTopOf="@+id/textGender" />
+
+    <TextView
+        android:id="@+id/textBirthdaySelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선택해주세요"
+        android:textColor="#8F8D8D"
+
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textBirthday"
+        app:layout_constraintEnd_toEndOf="@+id/view10"
+        app:layout_constraintTop_toTopOf="@+id/textBirthday" />
+
+    <TextView
+        android:id="@+id/textBirthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="생일"
+        android:textColor="#000000"
+
+        android:textSize="17dp"
+        app:layout_constraintStart_toStartOf="@+id/userNameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textGender" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
