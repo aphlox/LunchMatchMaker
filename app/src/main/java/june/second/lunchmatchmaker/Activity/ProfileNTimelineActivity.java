@@ -1,9 +1,12 @@
 package june.second.lunchmatchmaker.Activity;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +24,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,11 +35,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import june.second.lunchmatchmaker.Item.User;
-import june.second.lunchmatchmaker.Receiver.JoinApprovalReceiver;
 import june.second.lunchmatchmaker.Etc.NewJsonUtil;
 import june.second.lunchmatchmaker.Item.Timeline;
+import june.second.lunchmatchmaker.Item.User;
 import june.second.lunchmatchmaker.R;
+import june.second.lunchmatchmaker.Receiver.JoinApprovalReceiver;
 
 public class ProfileNTimelineActivity extends AppCompatActivity  {
     //디버깅을 위한 string 값
@@ -42,6 +48,7 @@ public class ProfileNTimelineActivity extends AppCompatActivity  {
 
 
 
+    User nowUser;
 
     //프로필----------------------------------------------------------------------------------------
     private TextView textNickname;  //프로필 자신 닉네임
@@ -50,6 +57,8 @@ public class ProfileNTimelineActivity extends AppCompatActivity  {
     private Button btnProfileEdit;  // 프로필 편집 버튼
     private  Uri selectedImageUri;  //프로필 사진 가져올때 uri 받아오는 변수
     private final int GET_GALLERY_IMAGE = 200; //프로필 가져올때 requestCode
+    String userProfilePath;
+
     //----------------------------------------------------------------------------------------------
 
 
@@ -78,7 +87,8 @@ public class ProfileNTimelineActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_n_timeline);
         Log.w(here , here +  "  onCreate");
-
+        //권한 허용 메소드
+        tedPermission();
 
 
         //액티비티내의 뷰 연동 및 클릭시의 동작 설정------------------------------------------------
@@ -131,7 +141,7 @@ public class ProfileNTimelineActivity extends AppCompatActivity  {
         });*/
 
 
-        //프로필 사진 눌러서 사진 가져와서 설정하기
+/*        //프로필 사진 눌러서 사진 가져와서 설정하기
         image_profile = findViewById(R.id.profileImage);
         image_profile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -141,7 +151,7 @@ public class ProfileNTimelineActivity extends AppCompatActivity  {
                 intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                 startActivityForResult(Intent.createChooser(intent, "Get Album"), GET_GALLERY_IMAGE);
             }
-        });
+        });*/
 
 
         //로그아웃 버튼
@@ -191,9 +201,9 @@ public class ProfileNTimelineActivity extends AppCompatActivity  {
 
         try {
             JSONObject nowUserJsonObject = new JSONObject(prefNowUser.getString("nowUser", "    "));
-            User nowUser = new User(nowUserJsonObject.getBoolean("userApproval"), nowUserJsonObject.getString("userId"), nowUserJsonObject.getString("userPw"), nowUserJsonObject.getString("userName")
+            nowUser = new User(nowUserJsonObject.getBoolean("userApproval"), nowUserJsonObject.getString("userId"), nowUserJsonObject.getString("userPw"), nowUserJsonObject.getString("userName")
                     , nowUserJsonObject.getString("userGender"), nowUserJsonObject.getString("userBirthday"), nowUserJsonObject.getString("userNickName")
-                    , nowUserJsonObject.getString("userComment"));
+                    , nowUserJsonObject.getString("userComment"), nowUserJsonObject.getString("userProfilePath"));
 
             textNickname.setText(nowUser.getUserNickName());    //프로필 설정
             textIntroduce.setText(nowUser.getUserComment());    //자기소개 설정
@@ -203,6 +213,8 @@ public class ProfileNTimelineActivity extends AppCompatActivity  {
             tvNowUserGender.setText(nowUser.getUserGender());
             TextView tvNowUserBirthday = findViewById(R.id.tvNowUserBirthday);
             tvNowUserBirthday.setText(nowUser.getUserBirthday());
+            userProfilePath = nowUser.getUserProfilePath();
+
 
         } catch (
                 JSONException e) {
@@ -375,8 +387,9 @@ public class ProfileNTimelineActivity extends AppCompatActivity  {
         Log.w(here+"  onResume", "onResume");
 
 
+        setImage();
         //쉐어드 json 형식으로 저장 추가하기--------------------------------------------------
-        SharedPreferences prefTimeline = getSharedPreferences("prefTimeline", MODE_PRIVATE);
+        SharedPreferences prefTimeline = getSharedPreferences(nowUser.getUserId()+"prefTimeline", MODE_PRIVATE);
         SharedPreferences.Editor timelineEditor = prefTimeline.edit();
 
         //쉐어드에서 스트링 가져오기 ( json 형식으로 되어있는)
@@ -528,6 +541,50 @@ public class ProfileNTimelineActivity extends AppCompatActivity  {
         //(아이템 변경 후여서)
         timelineAdapter.notifyDataSetChanged();
     }
+
+
+    private void setImage() {
+
+        //이미지 크기 조절
+        ImageView imageView = findViewById(R.id.profileImage);
+
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        Bitmap originalBm = BitmapFactory.decodeFile(userProfilePath, options);
+        Log.w(here, "setImage : userProfilePath " + userProfilePath);
+
+        imageView.setImageBitmap(originalBm);
+
+
+
+    }
+
+    //권한 허용 메소드
+    private void tedPermission() {
+
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                // 권한 요청 성공
+
+            }
+
+            @Override
+            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                // 권한 요청 실패
+            }
+        };
+
+        TedPermission.with(this)
+                .setPermissionListener(permissionListener)
+                .setRationaleMessage(getResources().getString(R.string.permission_2))
+                .setDeniedMessage(getResources().getString(R.string.permission_1))
+                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .check();
+
+    }
+
+
 
 
 

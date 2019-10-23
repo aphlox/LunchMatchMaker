@@ -184,7 +184,7 @@ public class RegisterProfileActivity extends AppCompatActivity {
                 //추가 되는 유저 json object 로 만들고 문자열로 내보내기
                 User user = new User(false,textId,  textPw ,userName.getText().toString(), textViewUserGender.getText().toString(),
                         textViewUserBirthday.getText().toString(),editUserNickname.getText().toString(),
-                        editUserComment.getText().toString());
+                        editUserComment.getText().toString(), sendFile.getAbsolutePath());
                 JSONObject userJsonObject = new JSONObject();
                 userDataToJson(userJsonObject, user);
                 Log.w(here, "userDataToJson  @"+  userJsonObject.toString());
@@ -291,34 +291,6 @@ public class RegisterProfileActivity extends AppCompatActivity {
 
         }
     };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -551,6 +523,8 @@ public class RegisterProfileActivity extends AppCompatActivity {
          *  기존에 데이터가 남아 있게 되면 원치 않은 삭제가 이뤄집니다.
          */
         sendFile = tempFile;
+        Log.w(here, "setImage: tempFile"+tempFile.toString() );
+
         tempFile = null;
 
     }
@@ -583,6 +557,7 @@ public class RegisterProfileActivity extends AppCompatActivity {
             jsonObject.put("userBirthday", user.getUserBirthday());
             jsonObject.put("userNickName", user.getUserNickName() );
             jsonObject.put("userComment", user.getUserComment());
+            jsonObject.put("userProfilePath", user.getUserProfilePath());
 
 
 

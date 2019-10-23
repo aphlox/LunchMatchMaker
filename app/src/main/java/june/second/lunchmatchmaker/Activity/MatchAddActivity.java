@@ -220,7 +220,7 @@ public class   MatchAddActivity extends AppCompatActivity {
                 JSONObject nowUserJsonObject = new JSONObject(prefNowUser.getString("nowUser","    "));
                 User nowUser = new User(nowUserJsonObject.getBoolean("userApproval"), nowUserJsonObject.getString("userId"), nowUserJsonObject.getString("userPw"), nowUserJsonObject.getString("userName")
                         , nowUserJsonObject.getString("userGender"), nowUserJsonObject.getString("userBirthday"), nowUserJsonObject.getString("userNickName")
-                        , nowUserJsonObject.getString("userComment"));
+                        , nowUserJsonObject.getString("userComment"), nowUserJsonObject.getString("userProfilePath"));
 
                 //리얼매치 객체 만들어서 파이어베이스에 저장
                 //리얼매치 생성자에 들어가는 것들

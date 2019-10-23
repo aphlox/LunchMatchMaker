@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject userJsonObject = new JSONObject(entry.getValue().toString());
                         user = new User(userJsonObject.getBoolean("userApproval"), userJsonObject.getString("userId"), userJsonObject.getString("userPw"), userJsonObject.getString("userName")
                                 , userJsonObject.getString("userGender"), userJsonObject.getString("userBirthday"), userJsonObject.getString("userNickName")
-                                , userJsonObject.getString("userComment"));
+                                , userJsonObject.getString("userComment"), userJsonObject.getString("userProfilePath"));
 
 
                         //로그인 - 사용자가 로그인 액티비티에 입력한 값과
@@ -219,6 +219,8 @@ public class LoginActivity extends AppCompatActivity {
             jsonObject.put("userBirthday", user.getUserBirthday());
             jsonObject.put("userNickName", user.getUserNickName());
             jsonObject.put("userComment", user.getUserComment());
+            jsonObject.put("userProfilePath", user.getUserProfilePath());
+
 
         } catch (JSONException e) {
             e.printStackTrace();

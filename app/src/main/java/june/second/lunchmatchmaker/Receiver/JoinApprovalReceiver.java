@@ -48,7 +48,7 @@ public class JoinApprovalReceiver extends BroadcastReceiver {
                     JSONObject userJsonObject = new JSONObject(entry.getValue().toString());
                     user = new User(userJsonObject.getBoolean("userApproval"), userJsonObject.getString("userId"), userJsonObject.getString("userPw"), userJsonObject.getString("userName")
                             , userJsonObject.getString("userGender"), userJsonObject.getString("userBirthday"), userJsonObject.getString("userNickName")
-                            , userJsonObject.getString("userComment"));
+                            , userJsonObject.getString("userComment"), userJsonObject.getString("userProfilePath"));
 
                     //유저 데이터들의 아이디들과 승인/거절 신호에 담긴 아이디와 비교
                     if(userJsonObject.getString("userId").trim().equals(userId.trim()) || user.getUserId().trim().equals(userId.trim()) ){
@@ -59,7 +59,7 @@ public class JoinApprovalReceiver extends BroadcastReceiver {
                             //userApproval 을 true 로 바꾸어줘서 정회원(활동가능)으로 바꾸어준다.
                             user = new User(true, userJsonObject.getString("userId"), userJsonObject.getString("userPw"), userJsonObject.getString("userName")
                                     , userJsonObject.getString("userGender"), userJsonObject.getString("userBirthday"), userJsonObject.getString("userNickName")
-                                    , userJsonObject.getString("userComment"));
+                                    , userJsonObject.getString("userComment"), userJsonObject.getString("userProfilePath"));
                             JSONObject newUserJsonObject = new JSONObject();
                             userDataToJson(newUserJsonObject, user);
                             Log.w("JoinApprovalReceiver", "userDataToJson  @"+  newUserJsonObject.toString());
@@ -120,6 +120,8 @@ public class JoinApprovalReceiver extends BroadcastReceiver {
             jsonObject.put("userBirthday", user.getUserBirthday());
             jsonObject.put("userNickName", user.getUserNickName() );
             jsonObject.put("userComment", user.getUserComment());
+            jsonObject.put("userProfilePath", user.getUserProfilePath());
+
 
 
 

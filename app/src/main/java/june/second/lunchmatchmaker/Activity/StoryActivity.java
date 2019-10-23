@@ -1,5 +1,6 @@
 package june.second.lunchmatchmaker.Activity;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -26,6 +27,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -45,9 +47,12 @@ public class StoryActivity extends AppCompatActivity {
     //디버깅을 위한 string 값
     String here = "StoryActivity";
 
+
+
     //스토리(갤러리) 구성요소=======================================================================
     //스토리(갤러리)--------------------------------------------------------------------------------
     //스토리 객체 리스트
+    Story story;
     static ArrayList<Story> storyArrayList = new ArrayList<Story>();
 
     private RecyclerView smallRecyclerView;
@@ -59,6 +64,10 @@ public class StoryActivity extends AppCompatActivity {
     private FrameLayout containerView;
     private FrameLayout fullScreenContainer;
     private LinearLayout overlayBarLayout;
+    private LinearLayout profileOverLayout;
+    private ImageView makerProfile;
+    private TextView makerNameNAge;
+
 
     private static final int SPAN_SMALL = 4;
     private static final int SPAN_MEDIUM = 3;
@@ -89,7 +98,8 @@ public class StoryActivity extends AppCompatActivity {
     //기타------------------------------------------------------------------------------------------
 
     private FloatingActionButton fabWriteStory;     //매치 추가해주는 fab
-
+    private LottieAnimationView heartAnimationView;
+    private boolean heartCondition =false;
     //----------------------------------------------------------------------------------------------
 
 
@@ -107,6 +117,52 @@ public class StoryActivity extends AppCompatActivity {
         overlay = fullScreenContainer.getOverlay(); //fullScreenContainer 에 오버레이 담기
         textOverlay = findViewById(R.id.textOverlay); //오버레이 되었을때 사진에 담긴 글을 나타내는 textView
         overlayBarLayout = findViewById(R.id.textOverLayout); //textOverlay 를 담고있는 리니어 레이아웃
+        makerProfile = findViewById(R.id.makerProfile);
+        makerNameNAge = findViewById(R.id.makerNameNAge);
+        profileOverLayout= findViewById(R.id.profileOverLayout);
+
+        //로띠 하트 애니메이션
+        heartAnimationView = findViewById(R.id.heartAnimationView);
+        heartAnimationView.setAnimation("drawing_a_love.json");
+        heartAnimationView.setOnClickListener(v -> {
+            Log.w(here, "heartCondition: "+heartCondition );
+            if(heartCondition){
+                heartCondition = !heartCondition;
+                heartAnimationView.setProgress(0);
+            }
+            else{
+                heartAnimationView.playAnimation();
+            }
+
+        });
+
+
+        heartAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                heartCondition = !heartCondition;
+
+
+
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+
+            }
+        });
 
         //작은 이미지일때는 리사이클러뷰의 이미지들 가로에 SPAN_SMALL (4개)만큼 배열
         smallGridLayoutManager = new GridLayoutManager(this, SPAN_SMALL);
@@ -304,6 +360,8 @@ public class StoryActivity extends AppCompatActivity {
                 //뷰는 해당 순서에 맞는 스토리의 이미지를 가져와서 그린다 (스토리 객체 리스트에서)
                 holder.setImageResource(StringToBitMap(storyArrayList.get(position).getStoryValue()));
 
+
+
                 //아이템을 누르면 해당 아이템의 이미지가 오버레이로 커지면서 크게 볼 수 있게 한다
                 //그리고 그렇게 커진 오버레이를 누르면 다시 작아지면서 원래 아이템 위치로 이동하는
                 //애니메이션이 작동한다.
@@ -322,7 +380,14 @@ public class StoryActivity extends AppCompatActivity {
                         //textOverlay(오버레이 되었을 때 해당 사진에 대한 글)
                         //에 해당 스토리 아이템의 글 설정해기
                         textOverlay.setText(storyArrayList.get(position).getStoryContent());
+                        //해당 스토리에 맞는 작성자 프로필 넣어주기
+                        setImage(storyArrayList.get(position).getStoryMakerProfileImage());
+                        Log.w(here, "onClick: setImage"+ storyArrayList.get(position).getStoryMakerProfileImage() );
 
+
+                        makerNameNAge.setText(storyArrayList.get(position).getStoryMakerNickname());
+                        makerNameNAge.setTextSize(30);
+                        Log.w(here, "onClick: makerNameNAge"+makerNameNAge.getText() );
                         //오버레이 커지는 애니메이션을 넣기 위한 값들 계산
                         final float originX = realView.getX();
                         final float originY = realView.getY();
@@ -357,6 +422,7 @@ public class StoryActivity extends AppCompatActivity {
                                 //오버레이 아이템에 대한 글을 보여주는 레이아웃(overlayBarLayout)을
                                 //보이게 설정
                                 overlayBarLayout.setVisibility(View.VISIBLE);
+                                profileOverLayout.setVisibility(View.VISIBLE);
                                 //화면을 덮는 fullScreenContainer 의 배경 흰색으로 설정
                                 fullScreenContainer.setBackgroundColor(
                                         getResources().getColor(android.R.color.white));
@@ -371,6 +437,8 @@ public class StoryActivity extends AppCompatActivity {
                                         fullScreenContainer.setBackgroundColor(
                                                 getResources().getColor(android.R.color.transparent));
                                         overlayBarLayout.setVisibility(View.INVISIBLE);
+                                        profileOverLayout.setVisibility(View.INVISIBLE);
+
                                         realView.animate().x(originX).y(originY).scaleY(1).scaleX(1).withEndAction(
                                                 new Runnable() {
                                                     @Override
@@ -446,6 +514,16 @@ public class StoryActivity extends AppCompatActivity {
                         //에 해당 스토리 아이템의 글 설정해기
                         textOverlay.setText(storyArrayList.get(position).getStoryContent());
 
+                        //해당 스토리에 맞는 작성자 프로필 넣어주기
+                        setImage(storyArrayList.get(position).getStoryMakerProfileImage());
+
+
+                        Log.w(here, "onClick: setImage"+ storyArrayList.get(position).getStoryMakerProfileImage() );
+
+
+                        makerNameNAge.setText(storyArrayList.get(position).getStoryMakerNickname());
+                        makerNameNAge.setTextSize(30);
+                        Log.w(here, "onClick: makerNameNAge"+makerNameNAge.getText() );
                         //오버레이 커지는 애니메이션을 넣기 위한 값들 계산
                         final float originX = view.getX();
                         final float originY = view.getY();
@@ -479,6 +557,8 @@ public class StoryActivity extends AppCompatActivity {
                                 //오버레이 아이템에 대한 글을 보여주는 레이아웃(overlayBarLayout)을
                                 //보이게 설정
                                 overlayBarLayout.setVisibility(View.VISIBLE);
+                                profileOverLayout.setVisibility(View.VISIBLE);
+
                                 //화면을 덮는 fullScreenContainer 의 배경 흰색으로 설정
                                 fullScreenContainer.setBackgroundColor(
                                         getResources().getColor(android.R.color.white));
@@ -492,6 +572,8 @@ public class StoryActivity extends AppCompatActivity {
                                         fullScreenContainer.setBackgroundColor(
                                                 getResources().getColor(android.R.color.transparent));
                                         overlayBarLayout.setVisibility(View.INVISIBLE);
+                                        profileOverLayout.setVisibility(View.INVISIBLE);
+
                                         view.animate().x(originX).y(originY).scaleY(1).scaleX(1).withEndAction(
                                                 new Runnable() {
                                                     @Override
@@ -576,13 +658,21 @@ public class StoryActivity extends AppCompatActivity {
 
             Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
             try {
-                Story story = new Story(entry.getKey(),  entry.getValue().toString().split("\\|",2)[0], entry.getValue().toString().split("\\|",2)[1]);
-                Log.w(here, "story.getKey()  :  " + entry.getKey());
-                Log.w(here, "story Content :  " + entry.getValue().toString().split("\\|",2)[0]);
+                if(entry.getKey().contains("lastIndex") ){
+                    Log.w(here, " lastposition  ");
 
-                Log.w(here, "story imageToString  :  " + entry.getValue().toString().split("\\|",2)[1]);
-                storyArrayList.add(story);
+                }
+                else {
 
+                    story = new Story(entry.getKey(), entry.getValue().toString().split("\\|", 4)[0], entry.getValue().toString().split("\\|", 4)[1],
+                            entry.getValue().toString().split("\\|", 4)[2], entry.getValue().toString().split("\\|", 4)[3]);
+                    Log.w(here, "story.getKey()  :  " + entry.getKey());
+                    Log.w(here, "story storyMakerProfileImage :  " + entry.getValue().toString().split("\\|", 4)[0]);
+                    Log.w(here, "story storyMakerNickname :  " + entry.getValue().toString().split("\\|", 4)[1]);
+                    Log.w(here, "story imageToString :  " + entry.getValue().toString().split("\\|", 4)[2]);
+                    Log.w(here, "story Content  :  " + entry.getValue().toString().split("\\|", 4)[3]);
+                    storyArrayList.add(story);
+                }
 
             } catch (ArrayIndexOutOfBoundsException e) {
                 // 중복되지 않는 키값을 위해 마지막으로 저장한 키값에다 +1 해서 lastposition 이라는 키값에 저장해두는데
@@ -594,34 +684,30 @@ public class StoryActivity extends AppCompatActivity {
             }
 
 
-
-
         }
 
         //storyArrayList 정렬
         Comparator<Story> sortStory = new Comparator<Story>() {
             @Override
             public int compare(Story story1, Story story2) {
-                int ret = 0 ;
+                int ret = 0;
 
                 if (Integer.parseInt(story1.getStoryKey()) < Integer.parseInt(story2.getStoryKey()))
-                    ret = 1 ;
+                    ret = 1;
                 else if (Integer.parseInt(story1.getStoryKey()) < Integer.parseInt(story2.getStoryKey()))
-                    ret = 0 ;
+                    ret = 0;
                 else
-                    ret = -1 ;
+                    ret = -1;
 
-                return ret ;
+                return ret;
 
                 // 위의 코드를 간단히 만드는 방법.
                 // return (item2.getNo() - item1.getNo()) ;
             }
-        } ;
+        };
 
 
         Collections.sort(storyArrayList, sortStory);
-
-
 
 
         //액티비티가 새로 사용자에게 보여지기전에
@@ -653,6 +739,27 @@ public class StoryActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.w(here, here + "  onDestroy");
+    }
+
+
+    private void setImage(String profilePath) {
+
+        //이미지 크기 조절
+
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        Bitmap originalBm = BitmapFactory.decodeFile(profilePath, options);
+        Log.w(here, "setImage : userProfilePath " + profilePath);
+        makerProfile.setImageBitmap(originalBm);
+
+
+
+/*        makerProfile.setBackground(new ShapeDrawable(new OvalShape()));
+        if(Build.VERSION.SDK_INT >= 21) {
+            makerProfile.setClipToOutline(true);
+        }*/
+
+
     }
 
 

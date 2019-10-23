@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewOverlay;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +43,11 @@ public class MatchListActivity extends AppCompatActivity {
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
     //----------------------------------------------------------------------------------------------
 
+    //----------------------------------------------------------------------------------------------
+    private LottieAnimationView matchAnimationView;
+
+    static ViewOverlay matchLottieOverlay;
+
 
     //인디케이터 시도-------------------------------------------------------------------------------
     private LayoutInflater inflater;
@@ -56,6 +63,10 @@ public class MatchListActivity extends AppCompatActivity {
 
 
         //액티비티내의 뷰 연동 및 클릭시의 동작 설정------------------------------------------------
+        matchAnimationView = findViewById(R.id.matchAnimationView);
+        matchLottieOverlay = matchAnimationView.getOverlay();
+
+
         //지도 이미지 눌러서 MainMapActivity 로 이동
         findViewById(R.id.mapButton).setOnClickListener(v -> {
             Intent intent = new Intent(this, MainMapActivity.class);

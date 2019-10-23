@@ -47,7 +47,7 @@ public class RegisterResultActivity extends AppCompatActivity {
                 JSONObject userJsonObject = new JSONObject(prefWaitUser.getString("waitUser",""));
                 user = new User(userJsonObject.getBoolean("userApproval"), userJsonObject.getString("userId"), userJsonObject.getString("userPw"), userJsonObject.getString("userName")
                         , userJsonObject.getString("userGender"), userJsonObject.getString("userBirthday"), userJsonObject.getString("userNickName")
-                        , userJsonObject.getString("userComment"));
+                        , userJsonObject.getString("userComment") , userJsonObject.getString("userProfilePath"));
                 Log.w(here, "userDataToJson  @"+  userJsonObject.toString());
 
                 if (user.isUserApproval()) {

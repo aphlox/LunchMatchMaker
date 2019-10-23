@@ -26,6 +26,9 @@ import androidx.core.content.FileProvider;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -33,11 +36,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import june.second.lunchmatchmaker.Item.User;
 import june.second.lunchmatchmaker.R;
 
 public class StoryWriteActivity extends AppCompatActivity {
     //디버깅을 위한 값
     String here = "StoryWriteActivity";
+
+
+    User nowUser;
 
 
     //카메라 + 저장---------------------------------------------------------------------------------
@@ -97,6 +104,24 @@ public class StoryWriteActivity extends AppCompatActivity {
 
 
 
+            //현재 유저 불러오기
+            //로그인 될때 해당 유저를 prefNowUser 에 접속 유저로 저장해놓은것
+            SharedPreferences prefNowUser = getSharedPreferences("prefNowUser", MODE_PRIVATE);
+            SharedPreferences.Editor prefNowUserEditor = prefNowUser.edit();
+
+            try {
+                JSONObject nowUserJsonObject = new JSONObject(prefNowUser.getString("nowUser", "    "));
+                nowUser = new User(nowUserJsonObject.getBoolean("userApproval"), nowUserJsonObject.getString("userId"), nowUserJsonObject.getString("userPw"), nowUserJsonObject.getString("userName")
+                        , nowUserJsonObject.getString("userGender"), nowUserJsonObject.getString("userBirthday"), nowUserJsonObject.getString("userNickName")
+                        , nowUserJsonObject.getString("userComment"), nowUserJsonObject.getString("userProfilePath"));
+
+            } catch (
+                    JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
             //shared 데이터 저장
             //갤러리 이미지들 데이터 저장 구현
             SharedPreferences prefGallery = getSharedPreferences("imageGallery", MODE_PRIVATE);
@@ -110,10 +135,14 @@ public class StoryWriteActivity extends AppCompatActivity {
             //나중에 데이터를 받아서 구분자 | 로 나눌때 처음 나오는 | 를 기준으로
             //2등분만 하기 때문에 스토리 내용에서 구분자인 | 를 아무리 입력해도
             //데이터 저장하고 불러올때 문제가 없다
+            String storyMakerProfileImage = nowUser.getUserProfilePath();
+            String storyMakerNickname = nowUser.getUserNickName();
+            String storyMaker =  storyMakerProfileImage.concat("|"+storyMakerNickname);
             String StoryImage = imageToString;
             String StoryContent = storyContentEditText.getText().toString();
             String StoryImageNContent = StoryImage.concat("|"+StoryContent);
-            Log.w("StoryWriteActivity", "StoryContentNImage  :  " + StoryImageNContent);
+            String storyItem = storyMaker.concat("|"+StoryImageNContent);
+            Log.w("StoryWriteActivity", "storyItem  :  " + storyItem);
 
 
             //키값은 저장될때마다 마지막으로 저장된 키값+1 해줘서 중복안되게 하기
@@ -121,12 +150,11 @@ public class StoryWriteActivity extends AppCompatActivity {
 
             Log.w(here, "storyKey: " + storyKey);
             editor.putInt("lastIndex", Integer.parseInt(storyKey) );
-            editor.putString(storyKey, StoryImageNContent);
+            editor.putString(storyKey, storyItem);
             editor.commit();
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP );
             startActivity(intent);
-
         });
 
         //이미지 추가하는 버튼(레이아웃)

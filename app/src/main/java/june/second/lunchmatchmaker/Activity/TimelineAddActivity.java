@@ -17,6 +17,9 @@ import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,11 +27,15 @@ import java.util.Locale;
 
 import june.second.lunchmatchmaker.Etc.NewJsonUtil;
 import june.second.lunchmatchmaker.Item.Timeline;
+import june.second.lunchmatchmaker.Item.User;
 import june.second.lunchmatchmaker.R;
 
 public class TimelineAddActivity extends AppCompatActivity {
     //디버그용
     String here = "MatchAddActivity";
+
+    User nowUser;
+
 
     //액티비티 구성요소의 객체 선언-----------------------------------------------------------------
     ImageView imageBack;    //뒤로가는 화살표 이미지
@@ -222,8 +229,24 @@ public class TimelineAddActivity extends AppCompatActivity {
             }*/
 
 
+            //현재 유저 불러오기
+            //로그인 될때 해당 유저를 prefNowUser 에 접속 유저로 저장해놓은것
+            SharedPreferences prefNowUser = getSharedPreferences("prefNowUser", MODE_PRIVATE);
+            SharedPreferences.Editor prefNowUserEditor = prefNowUser.edit();
+
+            try {
+                JSONObject nowUserJsonObject = new JSONObject(prefNowUser.getString("nowUser", "    "));
+                nowUser = new User(nowUserJsonObject.getBoolean("userApproval"), nowUserJsonObject.getString("userId"), nowUserJsonObject.getString("userPw"), nowUserJsonObject.getString("userName")
+                        , nowUserJsonObject.getString("userGender"), nowUserJsonObject.getString("userBirthday"), nowUserJsonObject.getString("userNickName")
+                        , nowUserJsonObject.getString("userComment"), nowUserJsonObject.getString("userProfilePath"));
+
+            } catch (
+                    JSONException e) {
+                e.printStackTrace();
+            }
+
             //쉐어드 json 형식으로 저장 추가하기--------------------------------------------------
-            SharedPreferences prefTimeline = getSharedPreferences("prefTimeline", MODE_PRIVATE);
+            SharedPreferences prefTimeline = getSharedPreferences(nowUser.getUserId()+"prefTimeline", MODE_PRIVATE);
             SharedPreferences.Editor timelineEditor = prefTimeline.edit();
 
             //쉐어드에서 스트링 가져오기 ( json 형식으로 되어있는)

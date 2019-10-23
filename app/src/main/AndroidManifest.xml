@@ -95,6 +95,10 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="8rxk7hxxbi" />
 
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="label" />
+
         <activity android:name=".Activity.MatchListActivity" />
         <!-- 사진 촬영을 위한 provide -->
         <provider

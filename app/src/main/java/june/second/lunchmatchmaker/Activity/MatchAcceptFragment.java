@@ -113,7 +113,7 @@ public class MatchAcceptFragment extends Fragment {
                     JSONObject nowUserJsonObject = new JSONObject(prefNowUser.getString("nowUser", "    "));
                     User nowUser = new User(nowUserJsonObject.getBoolean("userApproval"), nowUserJsonObject.getString("userId"), nowUserJsonObject.getString("userPw"), nowUserJsonObject.getString("userName")
                             , nowUserJsonObject.getString("userGender"), nowUserJsonObject.getString("userBirthday"), nowUserJsonObject.getString("userNickName")
-                            , nowUserJsonObject.getString("userComment"));
+                            , nowUserJsonObject.getString("userComment"), nowUserJsonObject.getString("userProfilePath"));
 
                     //현재 접속한 유저 불러왔으면
                     //매치에 참가시키기

@@ -10,9 +10,10 @@ public class User {
     private String userBirthday;
     private String userNickName;
     private String userComment;
+    private String userProfilePath;
 
 
-    public User(boolean userApproval, String userId, String userPw, String userName, String userGender, String userBirthday, String userNickName, String userComment) {
+    public User(boolean userApproval, String userId, String userPw, String userName, String userGender, String userBirthday, String userNickName, String userComment, String userProfilePath) {
         this.userApproval = userApproval;
         this.userId = userId;
         this.userPw = userPw;
@@ -21,6 +22,7 @@ public class User {
         this.userBirthday = userBirthday;
         this.userNickName = userNickName;
         this.userComment = userComment;
+        this.userProfilePath = userProfilePath;
     }
 
     public boolean isUserApproval() {
@@ -87,5 +89,11 @@ public class User {
         this.userComment = userComment;
     }
 
+    public String getUserProfilePath() {
+        return userProfilePath;
+    }
 
+    public void setUserProfilePath(String userProfilePath) {
+        this.userProfilePath = userProfilePath;
+    }
 }
