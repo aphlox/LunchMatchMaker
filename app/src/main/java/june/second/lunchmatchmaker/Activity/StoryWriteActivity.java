@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -25,6 +24,7 @@ import androidx.core.content.FileProvider;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.soundcloud.android.crop.Crop;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -250,62 +250,40 @@ public class StoryWriteActivity extends AppCompatActivity {
 
             if (tempFile != null) {
                 if (tempFile.exists()) {
-                    if (tempFile.delete()) {
-                        Log.w(here, tempFile.getAbsolutePath() + " 삭제 성공");
-                        tempFile = null;
-                    } else {
-                        Log.w(here, "tempFile 삭제 실패");
-                    }
 
-                } else {
-                    Log.w(here, "tempFile 존재하지 않음");
+                    if (tempFile.delete()) {
+                        Log.e(here, tempFile.getAbsolutePath() + " 삭제 성공");
+                        tempFile = null;
+                    }
                 }
-            } else {
-                Log.w(here, "tempFile is null");
             }
 
             return;
         }
 
-        if (requestCode == PICK_FROM_ALBUM) {
+        switch (requestCode) {
+            case PICK_FROM_ALBUM: {
 
-            Uri photoUri = data.getData();
-            Log.w(here, "PICK_FROM_ALBUM photoUri : " + photoUri);
+                Uri photoUri = data.getData();
+                Log.d(here, "PICK_FROM_ALBUM photoUri : " + photoUri);
 
-            Cursor cursor = null;
+                cropImage(photoUri);
 
-            try {
-
-                /*
-                 *  Uri 스키마를
-                 *  content:/// 에서 file:/// 로  변경한다.
-                 */
-                String[] proj = {MediaStore.Images.Media.DATA};
-
-                assert photoUri != null;
-                cursor = getContentResolver().query(photoUri, proj, null, null, null);
-
-                assert cursor != null;
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-
-                cursor.moveToFirst();
-
-                tempFile = new File(cursor.getString(column_index));
-
-                Log.w(here, "tempFile Uri : " + Uri.fromFile(tempFile));
-
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
+                break;
             }
+            case PICK_FROM_CAMERA: {
 
-            setImage();
+                Uri photoUri = Uri.fromFile(tempFile);
+                Log.d(here, "takePhoto photoUri : " + photoUri);
 
-        } else if (requestCode == PICK_FROM_CAMERA) {
+                cropImage(photoUri);
 
-            setImage();
-
+                break;
+            }
+            case Crop.REQUEST_CROP: {
+                //File cropFile = new File(Crop.getOutput(data).getPath());
+                setImage();
+            }
         }
     }
 
@@ -324,6 +302,7 @@ public class StoryWriteActivity extends AppCompatActivity {
      *  카메라에서 이미지 가져오기
      */
     private void takePhoto() {
+        isCamera = true;
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -336,6 +315,12 @@ public class StoryWriteActivity extends AppCompatActivity {
         }
         if (tempFile != null) {
 
+            /**
+             *  안드로이드 OS 누가 버전 이후부터는 file:// URI 의 노출을 금지로 FileUriExposedException 발생
+             *  Uri 를 FileProvider 도 감싸 주어야 합니다.
+             *
+             *  참고 자료 http://programmar.tistory.com/4 , http://programmar.tistory.com/5
+             */
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 
                 Uri photoUri = FileProvider.getUriForFile(this,
@@ -346,6 +331,8 @@ public class StoryWriteActivity extends AppCompatActivity {
             } else {
 
                 Uri photoUri = Uri.fromFile(tempFile);
+                Log.d(here, "takePhoto photoUri : " + photoUri);
+
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                 startActivityForResult(intent, PICK_FROM_CAMERA);
 
@@ -353,6 +340,33 @@ public class StoryWriteActivity extends AppCompatActivity {
         }
     }
 
+
+
+    /**
+     *  Crop 기능
+     */
+    private void cropImage(Uri photoUri) {
+
+        Log.d(here, "tempFile : " + tempFile);
+
+        /**
+         *  갤러리에서 선택한 경우에는 tempFile 이 없으므로 새로 생성해줍니다.
+         */
+        if(tempFile == null) {
+            try {
+                tempFile = createImageFile();
+            } catch (IOException e) {
+                Toast.makeText(this, "이미지 처리 오류! 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+                finish();
+                e.printStackTrace();
+            }
+        }
+
+        //크롭 후 저장할 Uri
+        Uri savingUri = Uri.fromFile(tempFile);
+
+        Crop.of(photoUri, savingUri).asSquare().start(this);
+    }
     /**
      *  폴더 및 파일 만들기
      */

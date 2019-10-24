@@ -22,7 +22,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="57dp"
-        android:background="#ACA4A4"
+        android:background="@color/themeLightOrange"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/melona_font"
             android:gravity="center"
             android:textSize="20dp" />
 
@@ -48,8 +49,7 @@
         <ImageView
             android:id="@+id/profileButtonOld"
             android:layout_width="50dp"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>
@@ -58,11 +58,12 @@
         android:id="@+id/rvMatchList"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/themeLightYellow"
+
         app:layout_constraintBottom_toTopOf="@+id/matchBottomBar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
 
 
     <View
@@ -101,10 +102,11 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/melona_font"
             android:text="매치"
             android:textColor="@color/colorAccent"
-            android:textSize="16dp"
 
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/MatchImage"
             app:layout_constraintStart_toStartOf="@+id/MatchImage"
@@ -114,6 +116,7 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/melona_font"
             android:text="스토리"
             android:textColor="@color/colorGrey50"
             android:textSize="16dp"
@@ -151,10 +154,11 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/melona_font"
             android:text="프로필"
             android:textColor="@color/colorGrey50"
-            android:textSize="16dp"
 
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/matchToProfileImage"
             app:layout_constraintStart_toStartOf="@+id/matchToProfileImage"

@@ -20,6 +20,8 @@
         android:gravity="center"
         android:text="Lunch Match Maker"
         android:textSize="30sp"
+        android:fontFamily="@font/melona_font"
+
         app:layout_constraintBottom_toTopOf="@+id/inputIdLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +34,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="아이디"
+        android:fontFamily="@font/melona_font"
+
         android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -40,6 +44,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputId"
+            android:fontFamily="@font/melona_font"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,6 +57,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputPwLayout"
+        android:fontFamily="@font/melona_font"
 
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -66,6 +72,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputPw"
+            android:fontFamily="@font/melona_font"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,6 +90,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="자동 로그인"
+        android:fontFamily="@font/melona_font"
+
         app:layout_constraintStart_toStartOf="@+id/inputPwLayout"
         app:layout_constraintTop_toBottomOf="@+id/inputPwLayout" />
 
@@ -93,11 +102,15 @@
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
         android:text="Login"
+        android:fontFamily="@font/melona_font"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/autoLoginCheckBox" />
 
     <Button
         android:id="@+id/button2"
+        android:fontFamily="@font/melona_font"
+
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -114,6 +127,8 @@
     <Button
         android:id="@+id/go_email_register"
         android:layout_width="0dp"
+        android:fontFamily="@font/melona_font"
+
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -130,6 +145,8 @@
 
     <TextView
         android:id="@+id/accountFind"
+        android:fontFamily="@font/melona_font"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

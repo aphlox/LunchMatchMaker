@@ -19,7 +19,8 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/fabRecommendChange"
         app:layout_constraintEnd_toEndOf="@+id/fabRecommendChange"
-        app:layout_constraintStart_toStartOf="@+id/fabRecommendChange" />
+        app:layout_constraintStart_toStartOf="@+id/fabRecommendChange"
+android:fontFamily="@font/melona_font"/>
 
     <TextView
         android:id="@+id/textView16"
@@ -40,15 +41,17 @@
         android:id="@+id/recommendValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/backgroud_item"
         android:elevation="3dp"
-        android:textColor="#000000"
-        android:textSize="15dp"
-        android:visibility="visible"
-        android:background="@color/recipeBlue4"
+        android:fontFamily="@font/melona_font"
 
-        app:layout_constraintEnd_toEndOf="@+id/fabRecommendChange"
-        app:layout_constraintStart_toStartOf="@+id/fabRecommendChange"
-        app:layout_constraintTop_toBottomOf="@+id/fabRecommendChange" />
+        android:textColor="#000000"
+        android:textSize="24dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/recommendCount"
@@ -82,7 +85,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mapFragment"
         app:maxImageSize="35dp"
-        app:srcCompat="@drawable/baseline_list_black_18dp" />
+        app:srcCompat="@drawable/baseline_list_black_18dp"
+android:fontFamily="@font/melona_font"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

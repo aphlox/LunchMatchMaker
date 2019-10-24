@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/melona_font"
             android:gravity="center"
             android:textSize="20dp" />
 
@@ -37,8 +38,7 @@
             android:id="@+id/check"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/check"
-            />
+            app:srcCompat="@drawable/check" />
 
 
     </LinearLayout>
@@ -48,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
+        android:fontFamily="@font/melona_font"
         android:text="Match 이름"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/matchEditTitle"
@@ -59,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:ems="10"
+        android:fontFamily="@font/melona_font"
         android:hint="Match 이름"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,6 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
+        android:fontFamily="@font/melona_font"
         android:text="Match 시간"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/matchTime"
@@ -81,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
+        android:fontFamily="@font/melona_font"
         android:text="MatchTime"
         android:textSize="35dp"
         app:layout_constraintStart_toStartOf="@+id/matchEditTitle"
@@ -91,6 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
+        android:fontFamily="@font/melona_font"
         android:text="Edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/matchTime" />
@@ -100,6 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
+        android:fontFamily="@font/melona_font"
         android:text="Match 장소"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/matchPlace"
@@ -111,6 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
         android:ems="10"
+        android:fontFamily="@font/melona_font"
         android:hint="장소"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/matchTime"
@@ -122,6 +129,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:fontFamily="@font/melona_font"
         android:text="Match 최대 인원수"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/peopleSpinner"
@@ -132,6 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
+        android:fontFamily="@font/melona_font"
         android:text="Match 대화 키워드"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/matchKeywordFirst"
@@ -143,6 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:ems="10"
+        android:fontFamily="@font/melona_font"
         android:hint="대화 키워드"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/matchPlace"
@@ -154,6 +164,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:ems="10"
+        android:fontFamily="@font/melona_font"
         android:hint="대화 키워드"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/matchKeywordFirst"
@@ -167,6 +178,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:ems="10"
+        android:fontFamily="@font/melona_font"
         android:hint="대화 키워드"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/matchKeywordSecond"
@@ -179,6 +191,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
+        android:fontFamily="@font/melona_font"
         app:layout_constraintEnd_toEndOf="@+id/matchPeopleTitle"
         app:layout_constraintTop_toBottomOf="@+id/matchPlace" />
 
@@ -211,6 +224,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
+            android:fontFamily="@font/melona_font"
             android:gravity="center_vertical"
             android:text="삭제"
             android:textSize="20dp" />

@@ -7,7 +7,6 @@
     tools:context=".Activity.MatchAddActivity">
 
 
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -31,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/melona_font"
             android:gravity="center"
             android:textSize="20dp" />
 
@@ -39,8 +39,7 @@
             android:id="@+id/check"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/check"
-            />
+            app:srcCompat="@drawable/check" />
 
 
     </LinearLayout>
@@ -50,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
+        android:fontFamily="@font/melona_font"
         android:text="Match 이름"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/matchTitle"
@@ -63,6 +63,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="70dp"
         android:ems="10"
+        android:fontFamily="@font/melona_font"
         android:hint="Match 이름"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
+        android:fontFamily="@font/melona_font"
         android:text="Match 시간"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/matchDate"
@@ -85,6 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
+        android:fontFamily="@font/melona_font"
         android:text="MatchDate"
         android:textSize="35dp"
         app:layout_constraintStart_toStartOf="@+id/matchTitle"
@@ -95,6 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
+        android:fontFamily="@font/melona_font"
         android:text="Edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/matchDate" />
@@ -104,6 +108,7 @@
         android:id="@+id/matchTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/melona_font"
         android:text="MatchTime"
         android:textSize="35dp"
         app:layout_constraintStart_toStartOf="@+id/matchTitle"
@@ -114,6 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
+        android:fontFamily="@font/melona_font"
         android:text="Edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnDateSet" />
@@ -146,6 +152,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
+            android:fontFamily="@font/melona_font"
             android:gravity="center_vertical"
             android:text="삭제"
             android:textSize="20dp" />

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -13,7 +13,9 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
 
         <ImageView
             android:id="@+id/storyWriteBack"
@@ -28,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/melona_font"
             android:gravity="center"
             android:text="스토리 작성"
             android:textSize="20dp" />
@@ -48,6 +51,7 @@
         android:layout_height="320dp"
 
         android:layout_marginTop="30dp"
+        android:fontFamily="@font/melona_font"
         android:maxWidth="240dp"
         android:maxHeight="320dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,6 +66,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="40dp"
         android:ems="10"
+        android:fontFamily="@font/melona_font"
         android:gravity="start|top"
         android:hint="오늘 있었던 일들을 적어주세요"
         android:inputType="textMultiLine"
@@ -100,6 +105,7 @@
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/melona_font"
             android:text="사진 변경"
             android:textColor="@color/black"
             android:textSize="20dp" />

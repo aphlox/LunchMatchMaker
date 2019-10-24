@@ -181,9 +181,6 @@ public class   MatchAddActivity extends AppCompatActivity {
 
             //추가 되는 매치 json object 로 만들고 문자열로 내보내기
             Match match = new Match(matchIndex,editMatchTitle.getText().toString(),textTime.getText().toString() ,editMatchPlace.getText().toString(),matchPeople,matchKeyword,coord);
-            JSONObject matchJsonObject = new JSONObject();
-            matchDataToJson(matchJsonObject, match);
-            Log.w(here, "matchDataToJson  @"+  matchJsonObject.toString());
 
             //Gson 부분적으로만 데이터 받아올수 있는지 테스트
             /*
@@ -205,10 +202,7 @@ public class   MatchAddActivity extends AppCompatActivity {
 */
 
 
-            Log.w(here, "matchIndex: " + matchIndex);
-            prefMatchEditor.putInt("lastIndex", matchIndex); //마지막으로 저장한 인덱스(키값) 저장
-            prefMatchEditor.putString(Integer.toString(matchIndex), matchJsonObject.toString()); // 키값으로 매치 객체 스트링으로 저장
-            prefMatchEditor.commit();
+
 
             //파이어 베이스=========================================================================
 
@@ -231,7 +225,6 @@ public class   MatchAddActivity extends AppCompatActivity {
                 realMatch.setFirstMemberNickname(nowUser.getUserNickName());
                 realMatch.setMatchNowPeople(1);
                 databaseReference.child("realMatch").child(Integer.toString(match.getMatchIndex())).setValue(realMatch);
-
 
             } catch (JSONException e) {
                 e.printStackTrace();

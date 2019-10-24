@@ -20,14 +20,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.naver.maps.map.overlay.Marker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import june.second.lunchmatchmaker.Item.Product;
 import june.second.lunchmatchmaker.Item.RealMatch;
 import june.second.lunchmatchmaker.R;
 
-import static june.second.lunchmatchmaker.Activity.MainMapActivity.realMatchArrayList;
 
 public class MatchListActivity extends AppCompatActivity {
     //디버깅을 위한 string 값
@@ -36,6 +37,12 @@ public class MatchListActivity extends AppCompatActivity {
     //데이터 저장-------------------------------------------------------------------------------
     RecyclerView rvMatchList;
     ProductCardAdapter mCardAdapter;
+
+    //매치 객체 리스트
+    static ArrayList<RealMatch> realMatchArrayList = new ArrayList<RealMatch>();
+    public static List<Marker> matchMarkerList = new ArrayList<Marker>();
+
+
     //------------------------------------------------------------------------------------------
 
     //파이어 베이스---------------------------------------------------------------------------------
@@ -148,6 +155,34 @@ public class MatchListActivity extends AppCompatActivity {
         //------------------------------------------------------------------------------------------
 
 
+        //매치 리스트 갱신
+        //매치 리스트 삭제후 다시 저장
+        databaseReference.child("realMatch").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                realMatchArrayList.clear();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    RealMatch realMatch = snapshot.getValue(RealMatch.class);
+
+                    realMatchArrayList.add(realMatch);
+
+                }
+                Log.w(here, "realMatchArrayList.size :  " + realMatchArrayList.size());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        rvMatchList.getAdapter().notifyDataSetChanged();
+        mCardAdapter.notifyDataSetChanged();
+
     }
 
 
@@ -214,8 +249,6 @@ public class MatchListActivity extends AppCompatActivity {
         SharedPreferences prefMatch = getSharedPreferences("prefMatch", MODE_PRIVATE);
         SharedPreferences.Editor prefMatchEditor = prefMatch.edit();
 
-        //matchArrayList => 매치 저장 전환중이라
-        MainMapActivity.matchArrayList.clear();
 
         //매치 리스트 갱신
         //매치 리스트 삭제후 다시 저장

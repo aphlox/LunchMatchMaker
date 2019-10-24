@@ -68,13 +68,14 @@ public class MatchInformationFragment extends ListFragment {
 
 
         //마커 객체 리스트의 마커들이 가지고 있는 태그들을 순서대로 arrayListTag에 넣어준다.
-        for (int i = 0; i <MainMapActivity.matchArrayList.size(); i++) {
-            arrayListTag.add(MainMapActivity.matchArrayList.get(i).getMatchTitle());
+        for (int i = 0; i <MatchListActivity.realMatchArrayList.size(); i++) {
+            arrayListTag.add(MatchListActivity.realMatchArrayList.get(i).getMatchTitle());
         }
+
 
         //프래그먼트 안의 리스트 디자인-------------------------------------------------------------
         ListView listView = getListView();
-        listView.setBackgroundColor(Color.parseColor("#3EBBB1"));   //배경설정
+        listView.setBackgroundColor(Color.parseColor("#FFFDE7"));   //배경설정
         listView.setDivider(new ColorDrawable(Color.WHITE));            //구분선 색상 흰색으로 설정
         listView.setDividerHeight(3); // 3 pixels height                //구분석 굵기 설정
         //------------------------------------------------------------------------------------------

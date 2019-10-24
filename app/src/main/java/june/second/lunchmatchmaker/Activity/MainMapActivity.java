@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.location.Location;
@@ -53,13 +52,12 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import june.second.lunchmatchmaker.Item.Match;
 import june.second.lunchmatchmaker.Item.Place;
-import june.second.lunchmatchmaker.Item.RealMatch;
 import june.second.lunchmatchmaker.R;
 import june.second.lunchmatchmaker.Service.LunchMatchService;
+
+import static june.second.lunchmatchmaker.Activity.MatchListActivity.matchMarkerList;
 
 
 public class MainMapActivity extends AppCompatActivity implements OnMapReadyCallback, MatchInformationFragment.markerSelectedListener {
@@ -93,9 +91,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     private NaverMap map;                                       //지도 객체 선언
 
 
-    //매치 객체 리스트
-    static ArrayList<Match> matchArrayList = new ArrayList<Match>();
-    static ArrayList<RealMatch> realMatchArrayList = new ArrayList<RealMatch>();
+
 
 
     // *fab = FloatingActionButton
@@ -131,7 +127,6 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     private final PointF crosshairPoint = new PointF(Float.NaN, Float.NaN);
 
     //마커를 보관할 객체 배열
-    public static List<Marker> matchMarkerList = new ArrayList<Marker>();
     public static List<Marker> placeMarkerList = new ArrayList<Marker>();
 
     //마커를 보일게할지 안보일게할지 결정하는 상태값
@@ -195,6 +190,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         fabRecommend = findViewById(R.id.fabRecommend);
         fabRecommendChange = findViewById(R.id.fabRecommendChange);
         tvRecommendValue = findViewById(R.id.recommendValue);
+        tvRecommendValue.setVisibility(View.INVISIBLE);
         tvRecommendCount = findViewById(R.id.recommendCount);
 
 
@@ -220,68 +216,15 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         super.onResume();
         Log.w(here + "  onResume", "onResume");
 
-        //매치 값들 불러오기------------------------------------------------------------------------
-        //매치 값을 저장한 쉐어드 불러오기
-        SharedPreferences prefMatch = getSharedPreferences("prefMatch", MODE_PRIVATE);
-        SharedPreferences.Editor prefMatchEditor = prefMatch.edit();
-
-        matchArrayList.clear();
-
-        //쉐어드에서 불러온 매치 json 값들 매치 객체로 만들어서 matchArrayList 에 저장하기
-        Map<String, ?> allEntries = prefMatch.getAll();
-        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-
-            Log.w("map values", entry.getKey() + ": " + entry.getValue().toString());
-            try {
-                JSONObject matchJsonObject = new JSONObject(entry.getValue().toString());
-                ArrayList<String> matchKeywordArray = new ArrayList<String>();
-                matchKeywordArray.add(matchJsonObject.getString("matchKeyword").substring(1, matchJsonObject.getString("matchKeyword").length() - 1).split(",")[0]);
-                matchKeywordArray.add(matchJsonObject.getString("matchKeyword").substring(1, matchJsonObject.getString("matchKeyword").length() - 1).split(",")[1]);
-                matchKeywordArray.add(matchJsonObject.getString("matchKeyword").substring(1, matchJsonObject.getString("matchKeyword").length() - 1).split(",")[2]);
-
-                //json 받아온 스트링값을 다시 LatLng 객체로 만들어주기
-                Double lat = Double.parseDouble(matchJsonObject.getString("matchMarker").split(",")[0].split("=")[1]);
-                Double lng = Double.parseDouble(matchJsonObject.getString("matchMarker").split(",")[1].split("=")[1].
-                        substring(0, matchJsonObject.getString("matchMarker").split(",")[1].split("=")[1].length() - 1));
-                LatLng coord = new LatLng(lat, lng);
-
-                Marker marker = new Marker();
-                Match match = new Match(matchJsonObject.getInt("matchIndex"), matchJsonObject.getString("matchTitle"),
-                        matchJsonObject.getString("matchTime"), matchJsonObject.getString("matchPlace"), matchJsonObject.getInt("matchPeople"), matchKeywordArray, coord);
-
-                Log.w(here, "matchJsonObject.getInt(\"matchIndex\"): " + matchJsonObject.getInt("matchIndex"));
-                Log.w(here, "matchJsonObject.getString(\"matchTitle\"): " + matchJsonObject.getString("matchTitle"));
-                Log.w(here, "matchJsonObject.getString(\"matchTime\"): " + matchJsonObject.getString("matchTime"));
-                Log.w(here, "matchJsonObject.getString(\"matchPlace\"): " + matchJsonObject.getString("matchPlace"));
-                Log.w(here, "matchJsonObject.getInt(\"matchPeople\"): " + matchJsonObject.getInt("matchPeople"));
-                Log.w(here, "(matchJsonObject.getString(\"matchKeyword\") : " + matchJsonObject.getString("matchKeyword"));
-                Log.w(here, "(matchJsonObject.getString(\"matchKeyword1\") : " + matchJsonObject.getString("matchKeyword").substring(1, matchJsonObject.getString("matchKeyword").length() - 1).split(",")[0]);
-                Log.w(here, "(matchJsonObject.getString(\"matchKeyword2\") : " + matchJsonObject.getString("matchKeyword").substring(1, matchJsonObject.getString("matchKeyword").length() - 1).split(",")[1]);
-                Log.w(here, "(matchJsonObject.getString(\"matchKeyword3\") : " + matchJsonObject.getString("matchKeyword").substring(1, matchJsonObject.getString("matchKeyword").length() - 1).split(",")[2]);
-                Log.w(here, "(matchJsonObject.getString(\"matchMarker\" : Lat : " + matchJsonObject.getString("matchMarker").split(",")[0].split("=")[1]);
-                Log.w(here, "(matchJsonObject.getString(\"matchMarker\" : Lng : " + matchJsonObject.getString("matchMarker").split(",")[1].split("=")[1].
-                        substring(0, matchJsonObject.getString("matchMarker").split(",")[1].split("=")[1].length() - 1));
-
-                matchArrayList.add(match);
-                Log.w(here, "matchArrayList: " + matchArrayList.size());
 
 
-            } catch (ArrayIndexOutOfBoundsException | JSONException e) {
-                // 중복되지 않는 키값을 위해 마지막으로 저장한 키값에다 +1 해서 lastposition 이라는 키값에 저장해두는데
-                // 위에서 스토리 객체를 만들때 모든 키 값을 불러와서 split 으로 나누기때문에 ArrayIndexOutOfBoundsException가 뜬다
-                //lastposition 는 숫자로만 이루어져있어서
-                //그래서 여기서 에러나는 것을 방지하기 위해서 try catch문을 사용했다.
-                Log.w(here, "ArrayIndexOutOfBoundsException => lastposition  ");
-                e.printStackTrace();
-            }
 
-
-        }
 
         //매치 마커 리스트도 갱신해주기-------------------------------------------------------------
         matchMarkerList.clear();
-        for (int i = 0; i < matchArrayList.size(); i++) {
-            addMarker(map, matchArrayList.get(i).getLatLng(), matchInfoWindow, i);
+        for (int i = 0; i < MatchListActivity.realMatchArrayList.size(); i++) {
+            LatLng markerLatLng = new LatLng(MatchListActivity.realMatchArrayList.get(i).getLat(), MatchListActivity.realMatchArrayList.get(i).getLng());
+            addMarker(map, markerLatLng , matchInfoWindow, i);
         }
         setMarkers(map, matchMarkerList);
         //------------------------------------------------------------------------------------------
@@ -290,8 +233,8 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         //Fragment 갱신-----------------------------------------------------------------------------
         //프래그먼트의 어댑터 갱신
         MatchInformationFragment.adapter.clear();                       //어댑터의 데이터 정리(삭제)
-        for (int i = 0; i < matchArrayList.size(); i++) {  //어댑터에 마커들 다시 새로 추가해주기
-            MatchInformationFragment.arrayListTag.add(matchArrayList.get(i).getMatchTitle());
+        for (int i = 0; i < MatchListActivity.realMatchArrayList.size(); i++) {  //어댑터에 마커들 다시 새로 추가해주기
+            MatchInformationFragment.arrayListTag.add(MatchListActivity.realMatchArrayList.get(i).getMatchTitle());
         }
         MatchInformationFragment.adapter.notifyDataSetChanged();  //어댑터 갱신
 
@@ -369,24 +312,53 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
             protected View getContentView(@NonNull InfoWindow infoWindow) {
                 View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_match, null, false);
                 //마커의 태그를 기준으로 가져오는 건 =>
-                //태그를 저장할때 매치리스트(matchArrayList)에서의 인덱스로 저장했기 때문
+                //태그를 저장할때 매치리스트(MatchListActivity.realMatchArrayList)에서의 인덱스로 저장했기 때문
 
 
                 TextView matchInfoName = view.findViewById(R.id.matchInfoName);
-                matchInfoName.setText(matchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchTitle());
+                matchInfoName.setText(MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchTitle());
 
                 TextView matchInfoTime = view.findViewById(R.id.matchInfoTime);
-                matchInfoTime.setText(matchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchTime());
+                matchInfoTime.setText(MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchTime());
 
                 //인원수 표시는 일단 보류 (파이어베이스에서 값을 가져오는것 + 디자인 때문에)
 /*                TextView matchInfoPeople = view.findViewById(R.id.matchInfoPeople);
-                matchInfoPeople.setText(matchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchPeople());*/
+                matchInfoPeople.setText(MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchPeople());*/
 
                 TextView matchInfoPlace = view.findViewById(R.id.matchInfoPlace);
-                matchInfoPlace.setText(matchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchPlace());
+                matchInfoPlace.setText(MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchPlace());
 
-                TextView matchInfoReview = view.findViewById(R.id.matchInfoKeyword);
-                matchInfoReview.setText(matchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchKeyword().get(0));
+                TextView matchKeywordFirst = view.findViewById(R.id.matchInfoKeywordFirst);
+                if (MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchKeywordFirst() == null
+                        || MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchKeywordFirst().length() == 0) {
+                    matchKeywordFirst.setVisibility(View.GONE);
+                } else {
+                    matchKeywordFirst.setText("# "+MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchKeywordFirst());
+                }
+
+
+                TextView matchKeywordSecond = view.findViewById(R.id.matchInfoKeywordSecond);
+                if (MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchKeywordSecond() == null
+                        || MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchKeywordSecond().length() == 0) {
+                    matchKeywordSecond.setVisibility(View.GONE);
+                } else {
+                    matchKeywordSecond.setText("# "+MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchKeywordSecond());
+                }
+
+
+
+                TextView matchKeywordThird = view.findViewById(R.id.matchInfoKeywordThird);
+                matchKeywordThird.setText(MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchKeywordThird());
+
+                if (MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchKeywordThird() == null
+                        || MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchKeywordThird().length() == 0) {
+                    matchKeywordThird.setVisibility(View.GONE);
+                } else {
+                    matchKeywordThird.setText("# "+MatchListActivity.realMatchArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMatchKeywordThird());
+                }
+
+
+
 
 
                 return view;
@@ -566,7 +538,6 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
             //AsyncTask 작동시킴(맛집 파싱)
             new RestaurantCrawling().execute();
-            tvRecommendValue.setText("");
 
         });
         //------------------------------------------------------------------------------------------
@@ -618,6 +589,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         //------------------------------------------------------------------------------------------
 
 
+        setMarkers(map, matchMarkerList);
 
         //------------------------------------------------------------------------------------------
     }
@@ -647,6 +619,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         //ex) 1위 ~ 7위
         //ex) 15 ~ 24위
         String recommendText = (selectMin+1) + "  ~  " + selectMax+"위";
+        tvRecommendValue.setVisibility(View.VISIBLE);
         tvRecommendValue.setText(recommendText);
 
         Log.w(here, "fabRecommendChange - recommendText : "+ recommendText );
@@ -849,6 +822,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
             }
             else{
+                tvRecommendValue.setVisibility(View.INVISIBLE);
                 progressDialog.dismiss();
             }
 

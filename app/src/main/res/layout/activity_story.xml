@@ -20,7 +20,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/melona_font"
             android:text="스토리"
+
             android:textSize="20sp" />
 
     </androidx.appcompat.widget.Toolbar>
@@ -59,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="#E0E0E0"
         android:visibility="visible">
 
 
@@ -95,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@android:color/white"
+        android:background="@color/themeLightYellow"
         android:visibility="gone">
 
 
@@ -120,7 +123,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:fontFamily="@font/melona_font"
                 android:gravity="center"
+
                 android:text="글쓰기"
                 android:textSize="20dp" />
 
@@ -142,8 +147,8 @@
             android:id="@+id/profileOverLayout"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginTop="17dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="17dp"
 
             android:elevation="3dp"
             android:orientation="horizontal"
@@ -152,8 +157,8 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/makerProfile"
                 android:layout_width="70dp"
-                app:civ_border_width="1.5dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:civ_border_width="1.5dp" />
 
 
             <TextView
@@ -162,8 +167,36 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:textColor = "#000000"
+                android:fontFamily="@font/melona_font"
+
+                android:textColor="#000000"
                 android:textSize="17dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contentOverLayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/backgroud_item"
+
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="40dp"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="start|top"
+
+                android:fontFamily="@font/melona_font"
+                android:textColor="@color/black"
+
+                android:textSize="28dp"
+
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -176,26 +209,13 @@
             android:orientation="vertical"
             android:visibility="invisible">
 
-            <TextView
-                android:id="@+id/textOverlay"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_gravity="start|top"
-                android:background="@drawable/backgroud_item"
-                android:text="@string/apexes"
-                android:textColor="@color/black"
-
-                android:textSize="18dp"
-
-                />
-
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/heartAnimationView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="5dp"
-
                 android:layout_gravity="center"
+
+                android:layout_marginTop="5dp"
 
                 />
 
@@ -238,6 +258,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/melona_font"
             android:text="매치"
             android:textColor="@color/colorGrey50"
             android:textSize="16dp"
@@ -251,7 +272,9 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/melona_font"
             android:text="스토리"
+
             android:textColor="@color/colorAccent"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -288,6 +311,7 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/melona_font"
             android:text="프로필"
             android:textColor="@color/colorGrey50"
             android:textSize="16dp"

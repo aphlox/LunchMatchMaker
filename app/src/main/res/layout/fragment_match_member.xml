@@ -2,15 +2,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:orientation="vertical"
-  >
+    android:layout_height="210dp"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/fragmentbackcolor">
+        android:background="@color/themeLightYellow"
+        >
 
+
+        <Button
+            android:id="@+id/btnMatchAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/backgroud_item"
+            android:text="매치 참가하기"
+            android:textSize="20dp"
+            android:fontFamily="@font/melona_font"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/member1"
@@ -18,6 +34,8 @@
             android:layout_height="wrap_content"
             android:text="김파이"
             android:textSize="35dp"
+            android:fontFamily="@font/melona_font"
+
             app:layout_constraintEnd_toStartOf="@+id/member3"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +46,7 @@
             android:id="@+id/member2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/melona_font"
 
             android:text="이누가"
             android:textSize="35dp"
@@ -40,6 +59,7 @@
             android:id="@+id/member3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/melona_font"
 
             android:text="오레오"
             android:textSize="35dp"
@@ -53,21 +73,12 @@
             android:id="@+id/member4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/melona_font"
 
             android:text="최멜로"
             android:textSize="35dp"
             app:layout_constraintStart_toStartOf="@+id/member3"
             app:layout_constraintTop_toTopOf="@+id/member2" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/indicator_third" />
 
         <TextView
             android:id="@+id/memberTitle"
@@ -75,8 +86,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="참가하는 사람들"
+            android:fontFamily="@font/melona_font"
+
             android:textColor="#000000"
-            android:textSize="20dp"
+            android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

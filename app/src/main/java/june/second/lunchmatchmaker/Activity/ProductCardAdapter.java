@@ -136,14 +136,10 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
                 return MatchTitleFragment.newInstance(position); //첫번째 - 매치 제목 프래그먼트
 
             } else if (position == 1) {
-                return MatchContentFragment.newInstance(position); //두번째 - 매치 내용 프래그먼트
-            } else if (position == 2) {
-                return MatchMemberFragment.newInstance(position); //세번째 - 매치 멤버 프래그먼트
-            } else if (position == 3) {
-                return MatchAcceptFragment.newInstance(position); //네번째 - 매치 수락 프래그먼트
+                return MatchMemberFragment.newInstance(position); //세번째 - 매치 멤버/수락 프래그먼트
             }
 
-            return MatchAcceptFragment.newInstance(position);
+            return MatchMemberFragment.newInstance(position);
 
 
         }
@@ -156,7 +152,7 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
         //리사이클러뷰 내의 뷰페이저 개수 설정
         @Override
         public int getCount() {
-            return 4;
+            return 2;
         }
     }
 

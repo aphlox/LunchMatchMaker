@@ -76,6 +76,10 @@ dependencies {
     //로띠 라이브러리
     implementation 'com.airbnb.android:lottie:3.1.0'
 
+    //crop
+    implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
+
+
 
 }
 

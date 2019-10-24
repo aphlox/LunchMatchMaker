@@ -65,6 +65,9 @@ public class StoryActivity extends AppCompatActivity {
     private FrameLayout fullScreenContainer;
     private LinearLayout overlayBarLayout;
     private LinearLayout profileOverLayout;
+    private LinearLayout contentOverLayout;
+
+
     private ImageView makerProfile;
     private TextView makerNameNAge;
 
@@ -120,6 +123,7 @@ public class StoryActivity extends AppCompatActivity {
         makerProfile = findViewById(R.id.makerProfile);
         makerNameNAge = findViewById(R.id.makerNameNAge);
         profileOverLayout= findViewById(R.id.profileOverLayout);
+        contentOverLayout = findViewById(R.id.contentOverLayout);
 
         //로띠 하트 애니메이션
         heartAnimationView = findViewById(R.id.heartAnimationView);
@@ -423,6 +427,8 @@ public class StoryActivity extends AppCompatActivity {
                                 //보이게 설정
                                 overlayBarLayout.setVisibility(View.VISIBLE);
                                 profileOverLayout.setVisibility(View.VISIBLE);
+                                contentOverLayout.setVisibility(View.VISIBLE);
+
                                 //화면을 덮는 fullScreenContainer 의 배경 흰색으로 설정
                                 fullScreenContainer.setBackgroundColor(
                                         getResources().getColor(android.R.color.white));
@@ -438,6 +444,7 @@ public class StoryActivity extends AppCompatActivity {
                                                 getResources().getColor(android.R.color.transparent));
                                         overlayBarLayout.setVisibility(View.INVISIBLE);
                                         profileOverLayout.setVisibility(View.INVISIBLE);
+                                        contentOverLayout.setVisibility(View.INVISIBLE);
 
                                         realView.animate().x(originX).y(originY).scaleY(1).scaleX(1).withEndAction(
                                                 new Runnable() {
@@ -558,10 +565,11 @@ public class StoryActivity extends AppCompatActivity {
                                 //보이게 설정
                                 overlayBarLayout.setVisibility(View.VISIBLE);
                                 profileOverLayout.setVisibility(View.VISIBLE);
+                                contentOverLayout.setVisibility(View.VISIBLE);
 
                                 //화면을 덮는 fullScreenContainer 의 배경 흰색으로 설정
                                 fullScreenContainer.setBackgroundColor(
-                                        getResources().getColor(android.R.color.white));
+                                        getResources().getColor(R.color.themeLightYellow));
                                 fullScreenContainer.setOnClickListener(new View.OnClickListener() {
                                     //클릭하면 작아지면서 원래 위치로 돌아가게 설정
                                     //이때 fullScreenContainer 배경화면 투명
@@ -573,6 +581,7 @@ public class StoryActivity extends AppCompatActivity {
                                                 getResources().getColor(android.R.color.transparent));
                                         overlayBarLayout.setVisibility(View.INVISIBLE);
                                         profileOverLayout.setVisibility(View.INVISIBLE);
+                                        contentOverLayout.setVisibility(View.INVISIBLE);
 
                                         view.animate().x(originX).y(originY).scaleY(1).scaleX(1).withEndAction(
                                                 new Runnable() {

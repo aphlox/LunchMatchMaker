@@ -95,12 +95,15 @@ public class MatchTitleFragment extends Fragment {
         verticalPosition = Integer.parseInt(String.valueOf(container.getId()))-1;
 
         //매치들을 저장한 객체리스트에서 해당 포지션값에 맞는 데이터 가져오기
-        RealMatch realMatch = MainMapActivity.realMatchArrayList.get(verticalPosition);
+        RealMatch realMatch = MatchListActivity.realMatchArrayList.get(verticalPosition);
 
 
 
         matchMainTitle = v.findViewById(R.id.matchMainTitle);
-
+        TextView maxPeople = v.findViewById(R.id.maxPeople);
+        TextView matchTime = v.findViewById(R.id.time);
+        TextView nowPeople = v.findViewById(R.id.nowPeople);
+        TextView matchPlace = v.findViewById(R.id.place);
 
         v.setOnClickListener(view -> {
             //디버깅용
@@ -144,6 +147,11 @@ public class MatchTitleFragment extends Fragment {
                 else {
                     matchMainTitle.setText(realMatch.getMatchTitle());
                 }
+
+                nowPeople.setText(Integer.toString(realMatch.getMatchNowPeople()));
+                maxPeople.setText(Integer.toString(realMatch.getMatchMaxPeople()));
+                matchTime.setText(realMatch.getMatchTime());
+                matchPlace.setText(realMatch.getMatchPlace());
 
 
             }

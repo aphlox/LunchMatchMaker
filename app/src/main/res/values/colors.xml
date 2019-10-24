@@ -18,6 +18,10 @@
     <color name="recipeBlue3">#add9dc</color>
     <color name="recipeBlue4">#f1fbf0</color>
 
-
+    <color name="themeHotPink">#E57373</color>
+    <color name="themeLightOrange">#FFE0B2</color>
+    <color name="themeLightYellow">#FFFDE7</color>
+    <color name="themeLightPink">#FCE4EC</color>
+    <color name="themeLightGray">#EFEBE9</color>
 
 </resources>

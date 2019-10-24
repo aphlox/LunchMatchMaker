@@ -65,6 +65,11 @@
         <activity android:name=".Activity.RegisterEmailActivity"></activity>
         <activity android:name=".Activity.AccountFindActivity"></activity>
         <activity android:name=".Activity.RegisterProfileActivity"></activity>
+        <!-- crop activity -->
+        <activity
+            android:name="com.soundcloud.android.crop.CropImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Activity.StoryWriteActivity"
             android:windowSoftInputMode="adjustResize" />

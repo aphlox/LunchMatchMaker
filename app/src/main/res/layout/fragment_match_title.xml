@@ -2,15 +2,90 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:orientation="vertical"
-  >
+    android:layout_height="210dp"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/fragmentbackcolor">
+        android:background="@color/themeLightYellow"
+        >
 
+
+        <TextView
+            android:id="@+id/slash2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+
+            android:text="/"
+            android:textSize="40dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView19"
+            app:layout_constraintStart_toStartOf="@+id/textView19"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+        <TextView
+            android:id="@+id/maxPeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="25dp"
+            android:text="4"
+            android:textSize="35dp"
+            app:layout_constraintBottom_toBottomOf="@+id/slash2"
+            app:layout_constraintStart_toEndOf="@+id/slash2"
+            app:layout_constraintTop_toTopOf="@+id/slash2" />
+
+        <TextView
+            android:id="@+id/nowPeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="25dp"
+            android:text="3"
+            android:textSize="35dp"
+            app:layout_constraintBottom_toBottomOf="@+id/slash2"
+            app:layout_constraintEnd_toStartOf="@+id/slash2"
+            app:layout_constraintTop_toTopOf="@+id/slash2" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="70dp"
+            android:fontFamily="@font/melona_font"
+            android:text="인원"
+            android:textSize="26dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="8dp"
+            android:text="홍콩반점"
+            android:textSize="22dp"
+            android:fontFamily="@font/melona_font"
+
+            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/melona_font"
+            android:text="오후 1시 30분"
+            android:textSize="22dp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
 
         <TextView
             android:id="@+id/matchMainTitle"
@@ -19,7 +94,10 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
+            android:fontFamily="@font/melona_font"
             android:textSize="26dp"
+            android:textColor="#181515"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.48"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,8 +107,10 @@
         <TextView
             android:id="@+id/keyword2"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:fontFamily="@font/melona_font"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/keyword1"
             app:layout_constraintStart_toEndOf="@+id/keyword1"
@@ -39,8 +119,10 @@
         <TextView
             android:id="@+id/keyword1"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
-            android:layout_marginBottom="35dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/melona_font"
 
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,8 +131,10 @@
         <TextView
             android:id="@+id/keyword3"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:fontFamily="@font/melona_font"
 
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/keyword2"
@@ -58,14 +142,23 @@
             app:layout_constraintTop_toTopOf="@+id/keyword2" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
+            android:id="@+id/imageView5"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/indicator_first" />
+            app:layout_constraintBottom_toTopOf="@+id/keyword1"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:srcCompat="@drawable/ic_place_black_24dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/keyword1"
+            app:layout_constraintStart_toStartOf="@+id/matchMainTitle"
+            app:srcCompat="@drawable/time" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,10 @@ import java.util.Calendar;
 import java.util.Map;
 
 import june.second.lunchmatchmaker.Item.Match;
+import june.second.lunchmatchmaker.Item.RealMatch;
 import june.second.lunchmatchmaker.R;
+
+import static june.second.lunchmatchmaker.Activity.MatchListActivity.realMatchArrayList;
 
 public class MatchEditActivity extends AppCompatActivity {
     //디버그용
@@ -77,7 +80,7 @@ public class MatchEditActivity extends AppCompatActivity {
         //매치 객체리스트에서 해당 아이템 가져오기
         Intent getIntent = getIntent();
         matchPosition = getIntent.getIntExtra("matchPosition",0);
-        Match getMatch = MainMapActivity.matchArrayList.get(matchPosition);
+        RealMatch getMatch = realMatchArrayList.get(matchPosition);
         //------------------------------------------------------------------------------------------
 
 
@@ -93,9 +96,9 @@ public class MatchEditActivity extends AppCompatActivity {
         //값 세팅해주기
         editMatchTitle.setText(getMatch.getMatchTitle());
         editMatchPlace.setText(getMatch.getMatchPlace());
-        editMatchKeywordFirst.setText(getMatch.getMatchKeyword().get(0));
-        editMatchKeywordSecond.setText(getMatch.getMatchKeyword().get(1));
-        editMatchKeywordThird.setText(getMatch.getMatchKeyword().get(2));
+        editMatchKeywordFirst.setText(getMatch.getMatchKeywordFirst());
+        editMatchKeywordSecond.setText(getMatch.getMatchKeywordSecond());
+        editMatchKeywordThird.setText(getMatch.getMatchKeywordThird());
         textTime.setText(getMatch.getMatchTime());
 
 
@@ -116,17 +119,9 @@ public class MatchEditActivity extends AppCompatActivity {
             matchKeyword.add(editMatchKeywordSecond.getText().toString());
             matchKeyword.add(editMatchKeywordThird.getText().toString());
 
-            //추가 되는 매치 json object 로 만들고 문자열로 내보내기
-            Match match = new Match(getMatch.getMatchIndex(),editMatchTitle.getText().toString(),textTime.getText().toString() ,editMatchPlace.getText().toString(),matchPeople,matchKeyword, getMatch.getLatLng());
-            JSONObject matchJsonObject = new JSONObject();
-            //매치의 값들을 Json 으로 변환해주는 메소드
-            matchDataToJson(matchJsonObject, match);
-            Log.w(here, "matchDataToJson  @"+  matchJsonObject.toString());
 
-            // 매치 인덱스(키값)으로 매치 객체 스트링으로 저장
-            Log.w(here, "matchIndex: " + getMatch.getMatchIndex());
-            prefMatchEditor.putString(Integer.toString(getMatch.getMatchIndex()), matchJsonObject.toString());
-            prefMatchEditor.commit();
+
+
 
             startActivity(intent);
         });
@@ -160,7 +155,7 @@ public class MatchEditActivity extends AppCompatActivity {
 
                             //매치 리스트 갱신
                             //매치 리스트 삭제후 다시 저장
-                            MainMapActivity.matchArrayList.clear();
+                            realMatchArrayList.clear();
 
 
                             Map<String, ?> allEntries = prefMatch.getAll();
@@ -200,8 +195,6 @@ public class MatchEditActivity extends AppCompatActivity {
                                     Log.w(here, "(matchJsonObject.getString(\"matchMarker\" : Lng : " + matchJsonObject.getString("matchMarker").split(",")[1].split("=")[1].
                                             substring(0, matchJsonObject.getString("matchMarker").split(",")[1].split("=")[1].length() - 1));*/
 
-                                    MainMapActivity.matchArrayList.add(match);
-                                    Log.w(here, "matchArrayList: " +MainMapActivity.matchArrayList.size());
 
                                 } catch (ArrayIndexOutOfBoundsException | JSONException e) {
                                     // 중복되지 않는 키값을 위해 마지막으로 저장한 키값에다 +1 해서 lastposition 이라는 키값에 저장해두는데
