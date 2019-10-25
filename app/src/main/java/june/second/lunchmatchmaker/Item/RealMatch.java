@@ -15,6 +15,7 @@ public class RealMatch {
     private String matchKeywordFirst;
     private String matchKeywordSecond;
     private String matchKeywordThird;
+    private String matchImageUrl;
 
 
     private String firstMemberId;

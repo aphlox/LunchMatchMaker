@@ -1,20 +1,16 @@
 package june.second.lunchmatchmaker.Activity;
 
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,122 +26,101 @@ import june.second.lunchmatchmaker.Item.User;
 import june.second.lunchmatchmaker.R;
 
 import static android.content.ContentValues.TAG;
-import static android.content.Context.MODE_PRIVATE;
+import static june.second.lunchmatchmaker.Activity.MatchListActivity.realMatchArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MatchMemberFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class MatchMemberFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
 
-    // TODO: Rename and change types of parameters
-    private int mParam1;
+public class MatchRoomActivity extends AppCompatActivity {
+    String here = "MatchRoomActivity";
 
-    int verticalPosition;
-
-    //context 가져오기  - 토스트 띄우기 위해서
-    private Context context;
 
     //파이어 베이스---------------------------------------------------------------------------------
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
     //----------------------------------------------------------------------------------------------
 
-    public MatchMemberFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @return A new instance of fragment MatchContentFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MatchMemberFragment newInstance(int param1) {
-        MatchMemberFragment fragment = new MatchMemberFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    int matchPosition;
+    TextView matchMainTitle;
+
+
+
+
+
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
+        Log.w(here, "onCreate ");
+
+        setContentView(R.layout.activity_match_room);
+        //매치 편집하기 위해 편집할 아이템의 포지션값 받아오고--------------------------------------
+        //매치 객체리스트에서 해당 아이템 가져오기
+        Intent getIntent = getIntent();
+        matchPosition = getIntent.getIntExtra("matchPosition",0);
+        RealMatch realMatch = realMatchArrayList.get(matchPosition);
+        //------------------------------------------------------------------------------------------
+
+
+        //뒤로가는 화살표 이미지
+        // ProfileNTimelineActivity 액티비티로 이동
+        findViewById(R.id.back).setOnClickListener(view -> {
+            Intent intent = new Intent(this, MatchListActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+
+        });
+
+
+        /*
+        //Glide 적용하는 이미지를 크롤링해서 가져와야돼서 보류
+        placeImage = findViewById(R.id.placeImage);
+        Glide.with(this).load("http://ldb.phinf.naver.net/20190810_148/1565366691827UwmhA_JPEG/o7Y7-DD7F4FEAS0NGUx0m7_L.jpg").into(placeImage); //Glide을 이용해서 이미지뷰에 url에 있는 이미지를 세팅해줌*/
+
+
+        matchMainTitle = findViewById(R.id.matchMainTitle);
+        TextView maxPeople = findViewById(R.id.maxPeople);
+        TextView matchTime = findViewById(R.id.time);
+        TextView nowPeople = findViewById(R.id.nowPeople);
+        TextView matchPlace = findViewById(R.id.place);
+
+
+        //제목 길이에 따라서 글자크기 조절해주기
+        if(realMatch.getMatchTitle().length() <8){
+            matchMainTitle.setText(realMatch.getMatchTitle());
+            matchMainTitle.setTextSize(45);
+        }
+        else if(realMatch.getMatchTitle().length() <15){
+            matchMainTitle.setText(realMatch.getMatchTitle());
+            matchMainTitle.setTextSize(30);
+        }
+        else {
+            matchMainTitle.setText(realMatch.getMatchTitle());
         }
 
+        nowPeople.setText(Integer.toString(realMatch.getMatchNowPeople()));
+        maxPeople.setText(Integer.toString(realMatch.getMatchMaxPeople()));
+        matchTime.setText(realMatch.getMatchTime());
+        matchPlace.setText(realMatch.getMatchPlace());
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_match_member, container, false);
-
-        //context
-        context = container.getContext();
-
-        //아이디를 저장할때 포지션값에 1을 더해서 저장하기때문에 다시 1을 빼준다
-        verticalPosition = Integer.parseInt(String.valueOf(container.getId())) - 1;
-
-        //매치들을 저장한 객체리스트에서 해당 포지션값에 맞는 데이터 가져오기
-        RealMatch realMatch = MatchListActivity.realMatchArrayList.get(verticalPosition);
-        Log.w("MatchMemberFragment", "onCreate container.getId(): " + container.getId());
-
-        //파이어베이스에서 데이터 가져와 참가한 닉네임들 설정해주기
-        databaseReference.child("realMatch").child(Integer.toString(realMatch.getMatchIndex()).trim()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                RealMatch realMatch = dataSnapshot.getValue(RealMatch.class);
-
-                TextView member1 = v.findViewById(R.id.member1);
-                member1.setText(realMatch.getFirstMemberNickname());
-                TextView member2 = v.findViewById(R.id.member2);
-                member2.setText(realMatch.getSecondMemberNickname());
-                TextView member3 = v.findViewById(R.id.member3);
-                member3.setText(realMatch.getThirdMemberNickname());
-                TextView member4 = v.findViewById(R.id.member4);
-                member4.setText(realMatch.getFourthMemberNickname());
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        v.setOnClickListener(view -> {
-            //디버깅용
-            Log.w("MatchTitleFragment", "verticalPosition: "+ verticalPosition);
-//            Toast.makeText(getContext(), verticalPosition+"", Toast.LENGTH_LONG);
-
-            Intent intent = new Intent(getContext(), MatchRoomActivity.class);
-            intent.putExtra("matchPosition", verticalPosition);
-            Log.w("MatchContentFragment", "setOnLongClickListener verticalPosition: "+ verticalPosition);
-            startActivity(intent);
-        });
-
+        TextView member1 = findViewById(R.id.member1);
+        member1.setText(realMatch.getFirstMemberNickname());
+        TextView member2 = findViewById(R.id.member2);
+        member2.setText(realMatch.getSecondMemberNickname());
+        TextView member3 = findViewById(R.id.member3);
+        member3.setText(realMatch.getThirdMemberNickname());
+        TextView member4 = findViewById(R.id.member4);
+        member4.setText(realMatch.getFourthMemberNickname());
 
         //매치 참가 버튼 눌렀을때
         //=> 현재 유저 불러오고 매치에 자리가 남아있는지, 이미 참가되어있는지 체크해서 참가시키기
-        Button btnMatchAccept = v.findViewById(R.id.btnMatchAccept);
+        Button btnMatchAccept = findViewById(R.id.btnMatchAccept);
         btnMatchAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //현재 접속되어있는 유저 데이터 불러오기
-                SharedPreferences prefNowUser = getContext().getSharedPreferences("prefNowUser", MODE_PRIVATE);
+                SharedPreferences prefNowUser = getSharedPreferences("prefNowUser", MODE_PRIVATE);
                 SharedPreferences.Editor prefNowUserEditor = prefNowUser.edit();
 
                 try {
@@ -184,7 +159,7 @@ public class MatchMemberFragment extends Fragment {
 
                                 } else if (nowUser.getUserId().trim().equals(realMatch.getFirstMemberId().trim())) {
                                     //이미 참가했을때
-                                    Toast.makeText(context, "이미 참가한 매치입니다", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "이미 참가한 매치입니다", Toast.LENGTH_LONG).show();
 
                                 } else if (realMatch.getSecondMemberId() == null || realMatch.getSecondMemberId().length() == 0) {
                                     Log.w(TAG, "onDataChange: Second");
@@ -195,14 +170,14 @@ public class MatchMemberFragment extends Fragment {
                                     realMatch.setMatchNowPeople(realMatch.getMatchNowPeople() + 1);
 
                                     databaseReference.child("realMatch").child(Integer.toString(realMatch.getMatchIndex())).setValue(realMatch);
-                                    Toast.makeText(context, "매치에 참가했습니다!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "매치에 참가했습니다!", Toast.LENGTH_LONG).show();
 
                                     return;
 
 
                                 } else if (nowUser.getUserId().trim().equals(realMatch.getSecondMemberId().trim())) {
                                     //이미 참가했을때
-                                    Toast.makeText(context, "이미 참가한 매치입니다", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "이미 참가한 매치입니다", Toast.LENGTH_LONG).show();
 
                                 } else if (realMatch.getThirdMemberId() == null || realMatch.getThirdMemberId().length() == 0) {
                                     Log.w(TAG, "onDataChange: Third");
@@ -213,14 +188,14 @@ public class MatchMemberFragment extends Fragment {
                                     realMatch.setMatchNowPeople(realMatch.getMatchNowPeople() + 1);
 
                                     databaseReference.child("realMatch").child(Integer.toString(realMatch.getMatchIndex())).setValue(realMatch);
-                                    Toast.makeText(context, "매치에 참가했습니다!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "매치에 참가했습니다!", Toast.LENGTH_LONG).show();
 
                                     return;
 
 
                                 } else if (nowUser.getUserId().trim().equals(realMatch.getThirdMemberId().trim())) {
                                     //이미 참가했을때
-                                    Toast.makeText(context, "이미 참가한 매치입니다", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "이미 참가한 매치입니다", Toast.LENGTH_LONG).show();
 
                                 } else if (realMatch.getFourthMemberId() == null || realMatch.getFourthMemberId().length() == 0) {
                                     Log.w(TAG, "onDataChange: Fourth");
@@ -230,7 +205,7 @@ public class MatchMemberFragment extends Fragment {
                                     realMatch.setMatchNowPeople(realMatch.getMatchNowPeople() + 1);
 
                                     databaseReference.child("realMatch").child(Integer.toString(realMatch.getMatchIndex())).setValue(realMatch);
-                                    Toast.makeText(context, "매치에 참가했습니다!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "매치에 참가했습니다!", Toast.LENGTH_LONG).show();
 
                                     return;
 
@@ -238,7 +213,7 @@ public class MatchMemberFragment extends Fragment {
 
 
                             } else {
-                                Toast.makeText(context, "이 매치는 이미 사람이 다 모였습니다", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "이 매치는 이미 사람이 다 모였습니다", Toast.LENGTH_LONG).show();
                             }
 
 
@@ -262,7 +237,13 @@ public class MatchMemberFragment extends Fragment {
 
 
 
-        return v;
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
 }

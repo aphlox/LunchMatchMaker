@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -108,7 +107,12 @@ public class MatchTitleFragment extends Fragment {
         v.setOnClickListener(view -> {
             //디버깅용
             Log.w("MatchTitleFragment", "verticalPosition: "+ verticalPosition);
-            Toast.makeText(getContext(), verticalPosition+"", Toast.LENGTH_LONG);
+//            Toast.makeText(getContext(), verticalPosition+"", Toast.LENGTH_LONG);
+
+            Intent intent = new Intent(getContext(), MatchRoomActivity.class);
+            intent.putExtra("matchPosition", verticalPosition);
+            Log.w("MatchContentFragment", "setOnLongClickListener verticalPosition: "+ verticalPosition);
+            startActivity(intent);
         });
 
 

@@ -12,15 +12,18 @@
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-
-
     <application
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@drawable/lunch_icon"
         android:label="@string/app_name"
         android:roundIcon="@drawable/lunch_icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        >
+
+        <activity android:name=".Activity.MatchRoomActivity"></activity>
+
         <receiver
             android:name=".Receiver.RebootReceiver"
             android:enabled="true"
@@ -30,7 +33,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Receiver.AlarmReceiver"/>
+        <receiver android:name=".Receiver.AlarmReceiver" />
         <receiver
             android:name=".Receiver.JoinApprovalReceiver"
             android:enabled="true"
@@ -40,18 +43,16 @@
             </intent-filter>
         </receiver>
 
-
         <service
             android:name=".Service.LunchMatchService"
             android:enabled="true"
             android:exported="true" />
-
-        <service android:name=".Service.RealService"
+        <service
+            android:name=".Service.RealService"
             android:enabled="true"
             android:exported="true" />
-
-
-        <service android:name=".Service.RestartService"
+        <service
+            android:name=".Service.RestartService"
             android:enabled="true"
             android:exported="true" />
 
@@ -62,10 +63,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.RegisterEmailActivity"></activity>
-        <activity android:name=".Activity.AccountFindActivity"></activity>
-        <activity android:name=".Activity.RegisterProfileActivity"></activity>
-        <!-- crop activity -->
+        <activity android:name=".Activity.RegisterEmailActivity" />
+        <activity android:name=".Activity.AccountFindActivity" />
+        <activity android:name=".Activity.RegisterProfileActivity" /> <!-- crop activity -->
         <activity
             android:name="com.soundcloud.android.crop.CropImageActivity"
             android:screenOrientation="portrait"
@@ -81,11 +81,10 @@
         <activity android:name=".Activity.StoryActivity" />
         <activity android:name=".Activity.StoryEditActivity" />
         <activity android:name=".Activity.TimelineAddActivity" />
-        <activity android:name=".Activity.RegisterResultActivity"/>
+        <activity android:name=".Activity.RegisterResultActivity" />
         <activity android:name=".Activity.TimelineEditActivity" />
-        <activity android:name=".Activity.RegisterEmailCheckActivity"/>
+        <activity android:name=".Activity.RegisterEmailCheckActivity" />
         <activity android:name=".Activity.MainMapActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -99,13 +98,11 @@
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="8rxk7hxxbi" />
-
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="label" />
 
-        <activity android:name=".Activity.MatchListActivity" />
-        <!-- 사진 촬영을 위한 provide -->
+        <activity android:name=".Activity.MatchListActivity" /> <!-- 사진 촬영을 위한 provide -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="june.second.lunchmatchmaker.provider"
