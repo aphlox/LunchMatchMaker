@@ -11,8 +11,11 @@
         android:id="@+id/placePhoto"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_marginRight="10dp"
         android:elevation="3dp"
-        app:srcCompat="@drawable/food" />
+        app:srcCompat="@drawable/food"
+
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
