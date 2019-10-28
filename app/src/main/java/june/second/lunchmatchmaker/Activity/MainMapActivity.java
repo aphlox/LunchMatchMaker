@@ -4,14 +4,17 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -111,7 +117,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
     //맛집 추천받았을때 순위별로 볼때 보이는 정보창 객체
     //7개씩 보여주는데 한번에 정보창을 띄워주려면 각각 객체로 선언해줘야됨
-    private InfoWindow placeInfoWindowFist = new InfoWindow();
+    private InfoWindow placeInfoWindowFirst = new InfoWindow();
     private InfoWindow placeInfoWindowSecond = new InfoWindow();
     private InfoWindow placeInfoWindowThird = new InfoWindow();
     private InfoWindow placeInfoWindowFourth = new InfoWindow();
@@ -157,6 +163,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     //true 이면 검색된 리스트에서 순위별로 보여준다.
     private Boolean RecommendRightNow = false; //
 
+    Bitmap bitmapPlaceImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -399,6 +406,24 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                     placeReview.setText(placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getMicroReview());
                 }
 
+                ImageView placePhoto = view.findViewById(R.id.placePhoto);
+//                placePhoto.setImageDrawable(getResources().getDrawable(R.drawable.food));
+                if(placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getImageSrc() == null){
+                    placePhoto.setVisibility(View.GONE);
+                }
+                else{
+                    //Glide을 이용해서 이미지뷰에 url에 있는 이미지를 세팅해줌*/
+//                    Glide.with(getApplicationContext()).load(placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getImageSrc()).into(placePhoto);
+//                    Glide.with(getApplicationContext()).load(placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString()))).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(placePhoto);
+
+                    placePhoto.setImageBitmap(placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getBitmapPlacePhoto());
+                    Log.w(here, "getContentView: "+ placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).toString());
+//                    Log.w(here, "getContentView: "+placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getBitmapPlacePhoto().toString() );
+                }
+
+
+//                Glide.with(getApplicationContext()).load("http://ldb.phinf.naver.net/20190110_72/1547106271234yDuYQ_JPEG/RkZOZiOVwvwMSEFrGxLViZo9.jpg").into(placePhoto);
+
                 return view;
             }
         };
@@ -572,14 +597,14 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         //7개씩 보여주는데 한번에 정보창을 띄워주려면 각각 객체로 선언해줘야됨
         //각각 맛집 어댑터 설정 및 투명도 70%보이게 설정
         //가시성을 위해
-        placeInfoWindowFist.setAdapter(placeInfoWindowAdapter);
+        placeInfoWindowFirst.setAdapter(placeInfoWindowAdapter);
         placeInfoWindowSecond.setAdapter(placeInfoWindowAdapter);
         placeInfoWindowThird.setAdapter(placeInfoWindowAdapter);
         placeInfoWindowFourth.setAdapter(placeInfoWindowAdapter);
         placeInfoWindowFifth.setAdapter(placeInfoWindowAdapter);
         placeInfoWindowSixth.setAdapter(placeInfoWindowAdapter);
         placeInfoWindowSeventh.setAdapter(placeInfoWindowAdapter);
-        placeInfoWindowFist.setAlpha(0.7f);
+        placeInfoWindowFirst.setAlpha(0.7f);
         placeInfoWindowSecond.setAlpha(0.7f);
         placeInfoWindowThird.setAlpha(0.7f);
         placeInfoWindowFourth.setAlpha(0.7f);
@@ -635,7 +660,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                 case 0 :
                     Marker markerFirst = placeMarkerList.get(selectMin);
                     markerFirst.setMap(map);
-                    placeInfoWindowFist.open(markerFirst);
+                    placeInfoWindowFirst.open(markerFirst);
                     break;
                 case 1 :
                     Marker markerSecond = placeMarkerList.get(selectMin + 1);
@@ -768,6 +793,35 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                             Log.w(here, "place -  getTotalReviewCount  :  " + place.getTotalReviewCount());
                             Log.w(here, "place -  getX  :  " + place.getX());
                             Log.w(here, "place -  getY  :  " + place.getY());
+                            Log.w(here, "place -  getImageSrc  :  " + place.getImageSrc());
+                            Glide.with(getApplicationContext()).load(place.getImageSrc()).preload();
+
+                            Glide.with(getApplicationContext()).asBitmap().load(place.getImageSrc()).into(new CustomTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                    bitmapPlaceImage = resource;
+                                    place.setBitmapPlacePhoto(bitmapPlaceImage);
+
+                                    Log.w(here, "onResourceReady: "+ resource.toString());
+                                }
+
+                                @Override
+                                public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                                }
+                            });
+
+//                            Glide.with(getApplicationContext()).load(place.getImageSrc()).diskCacheStrategy(DiskCacheStrategy.ALL).preload();
+//                            Glide.with(getApplicationContext()).load(place.getImageSrc()).diskCacheStrategy(DiskCacheStrategy.RESOURCE).preload();
+
+/*                            FutureTarget<File> future = Glide.with(getApplicationContext())
+                                    .load(place.getImageSrc())
+                                    .downloadOnly(500, 500);
+
+                            Glide.with(getApplicationContext())
+                                    .load(place.getImageSrc())
+                                    .preload(500, 500);*/
+
 
                             //맛집 리스트에 맛집 객체 추가
                             placeArrayList.add(place);

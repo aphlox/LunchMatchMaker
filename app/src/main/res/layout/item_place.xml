@@ -5,79 +5,95 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/border_place"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/placePhoto"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:elevation="3dp"
+        app:srcCompat="@drawable/food" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/placeName"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="이름"
-            android:textColor="#000000"
-            android:textSize="15dp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/placeCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/melona_font"
-            android:text="음식 카테고리"
-
-            android:textColor="#000000"
-            android:textSize="12dp" />
-
-        <View
-            android:layout_width="13dp"
-            android:layout_height="match_parent"></View>
-
-        <TextView
-            android:id="@+id/placePrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/melona_font"
-
-            android:text="가격대"
-            android:textColor="#000000"
-
-
-            android:textSize="12dp" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/placeReviewCount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:fontFamily="@font/melona_font"
-        android:text="리뷰 갯수"
-        android:textColor="#000000"
-        android:textSize="12dp" />
-
-    <TextView
-        android:id="@+id/placeReview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="1"
-        android:fontFamily="@font/melona_font"
+        android:orientation="vertical"
 
-        android:text="마이크로 리뷰"
-        android:textColor="#000000"
+        >
 
 
-        android:textSize="12dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/placeName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="이름"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/placeCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/melona_font"
+                android:text="음식 카테고리"
+
+                android:textColor="#000000"
+                android:textSize="12dp" />
+
+            <View
+                android:layout_width="13dp"
+                android:layout_height="match_parent"></View>
+
+            <TextView
+                android:id="@+id/placePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/melona_font"
+
+                android:text="가격대"
+                android:textColor="#000000"
+
+
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/placeReviewCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/melona_font"
+            android:text="리뷰 갯수"
+            android:textColor="#000000"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/placeReview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/melona_font"
+
+            android:text="마이크로 리뷰"
+            android:textColor="#000000"
+
+
+            android:textSize="12dp" />
+    </LinearLayout>
 </LinearLayout>

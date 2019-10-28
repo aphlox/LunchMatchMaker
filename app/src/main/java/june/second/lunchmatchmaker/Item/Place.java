@@ -1,5 +1,7 @@
 package june.second.lunchmatchmaker.Item;
 
+import android.graphics.Bitmap;
+
 public class Place {
 
     String name;
@@ -9,6 +11,9 @@ public class Place {
     String totalReviewCount;
     double x;
     double y;
+    String imageSrc;
+
+    Bitmap bitmapPlacePhoto;
 
 
     public String getName() {
@@ -66,4 +71,24 @@ public class Place {
     public void setY(double y) {
         this.y = y;
     }
+
+
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
+    }
+
+
+    public Bitmap getBitmapPlacePhoto() {
+        return bitmapPlacePhoto;
+    }
+
+    public void setBitmapPlacePhoto(Bitmap bitmapPlacePhoto) {
+        this.bitmapPlacePhoto = bitmapPlacePhoto;
+    }
+
+
 }
