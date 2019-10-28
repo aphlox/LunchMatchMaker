@@ -163,6 +163,11 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     //true 이면 검색된 리스트에서 순위별로 보여준다.
     private Boolean RecommendRightNow = false; //
 
+    //글라이드로 불러온 이미지(음식점 사진) 저장할 비트맵
+    //저장하는 이유는 정보창을 눌렀을떄 음식점사진이 바로 뜨는게 아니라
+    //글라이드에서 로드해서 불러오기떄문에 딜레이가 존재함
+    //그래서 미리 검색한 음식점들의 사진들을 글라이드로 불러와서 저장하고
+    //정보창을 눌렀을때 저장한 비트맵으로 보여줘서 딜레이(버퍼링)를 없앤다
     Bitmap bitmapPlaceImage;
 
     @Override
@@ -412,10 +417,8 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                     placePhoto.setVisibility(View.GONE);
                 }
                 else{
-                    //Glide을 이용해서 이미지뷰에 url에 있는 이미지를 세팅해줌*/
-//                    Glide.with(getApplicationContext()).load(placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getImageSrc()).into(placePhoto);
-//                    Glide.with(getApplicationContext()).load(placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString()))).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(placePhoto);
 
+                    //Glide을 이용해서 이미지뷰에 url에 있는 이미지를 세팅해줌*/
                     placePhoto.setImageBitmap(placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getBitmapPlacePhoto());
                     Log.w(here, "getContentView: "+ placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).toString());
 //                    Log.w(here, "getContentView: "+placeArrayList.get(Integer.parseInt(infoWindow.getMarker().getTag().toString())).getBitmapPlacePhoto().toString() );
@@ -794,12 +797,24 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                             Log.w(here, "place -  getX  :  " + place.getX());
                             Log.w(here, "place -  getY  :  " + place.getY());
                             Log.w(here, "place -  getImageSrc  :  " + place.getImageSrc());
-                            Glide.with(getApplicationContext()).load(place.getImageSrc()).preload();
 
+
+
+
+
+
+
+                            //글라이드로 불러온 이미지(음식점 사진) 저장할 비트맵
+                            //저장하는 이유는 정보창을 눌렀을떄 음식점사진이 바로 뜨는게 아니라
+                            //글라이드에서 로드해서 불러오기떄문에 딜레이가 존재함
+                            //그래서 미리 검색한 음식점들의 사진들을 글라이드로 불러와서 저장하고
+                            //정보창을 눌렀을때 저장한 비트맵으로(장소객체(place)에 같이 저장해둠) 보여줘서 딜레이(버퍼링)를 없앤다
+                            Glide.with(getApplicationContext()).load(place.getImageSrc()).preload();
                             Glide.with(getApplicationContext()).asBitmap().load(place.getImageSrc()).into(new CustomTarget<Bitmap>() {
                                 @Override
                                 public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                                     bitmapPlaceImage = resource;
+                                    //음식점사진(비트맵)을 place 객체에 set 해서 같이 저장해둔다/
                                     place.setBitmapPlacePhoto(bitmapPlaceImage);
 
                                     Log.w(here, "onResourceReady: "+ resource.toString());
@@ -810,18 +825,6 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
                                 }
                             });
-
-//                            Glide.with(getApplicationContext()).load(place.getImageSrc()).diskCacheStrategy(DiskCacheStrategy.ALL).preload();
-//                            Glide.with(getApplicationContext()).load(place.getImageSrc()).diskCacheStrategy(DiskCacheStrategy.RESOURCE).preload();
-
-/*                            FutureTarget<File> future = Glide.with(getApplicationContext())
-                                    .load(place.getImageSrc())
-                                    .downloadOnly(500, 500);
-
-                            Glide.with(getApplicationContext())
-                                    .load(place.getImageSrc())
-                                    .preload(500, 500);*/
-
 
                             //맛집 리스트에 맛집 객체 추가
                             placeArrayList.add(place);
