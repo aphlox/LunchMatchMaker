@@ -15,7 +15,7 @@
 
 # 주요 기능
 ## 네이버 지도 Api와 크롤링을 통해 지도에서 맛집 검색 및 순위별 추천 기능 
-![image](https://user-images.githubusercontent.com/44167177/102751975-2c346800-43ac-11eb-9928-49457a90a577.png)
+![image](https://user-images.githubusercontent.com/44167177/102752577-1c695380-43ad-11eb-9399-1926ea0d4440.png)
 
 ## Firebase Realtime DB로 다른 핸드폰을 가진 사용자들도 실제 매치에 참석 가능
 ![image](https://user-images.githubusercontent.com/44167177/102752042-48380980-43ac-11eb-981f-c2ade1a91435.png)
