@@ -3,6 +3,7 @@
 
 [![Watch the video](https://user-images.githubusercontent.com/44167177/102751834-e2e41880-43ab-11eb-987a-6e485bc76cbd.png)](https://www.youtube.com/watch?v=Vh3Tqi3Msdk&feature=youtu.be&ab_channel=june)
 
+* 누르면 youtube 영상으로 이동합니다
 
 # 프로젝트 기간
 > 2019/9/24 ~ 10/29
@@ -11,7 +12,7 @@
 > JAVA
 
 # 설명
-식사와 대화를 중심으로 사람들 간의 만남을 주선해주는 어플입니다. 
+> 식사와 대화를 중심으로 사람들 간의 만남을 주선해주는 어플입니다. 
 
 # 주요 기능
 ## 네이버 지도 Api와 크롤링을 통해 지도에서 맛집 검색 및 순위별 추천 기능 
